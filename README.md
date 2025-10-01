@@ -21,6 +21,9 @@ Event Organize is an application that allows users to send and receive invitatio
 ### Trello
 (https://trello.com/b/Icpr5auL)
 
+### ERD:
+![](./assets/ERD.png)
+
 ### Screenshots
 ### Home page
 ![](./assets/Welcome%20Page.png)
