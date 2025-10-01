@@ -2,15 +2,15 @@
 
 ## Date: 1-10-2025
 
-## By: Fatema Hussain-Fatema Mohammed-Fatema Ali
+## By: Fatema Hussain, Fatema Mohammed, Fatema Ali
 
 ### Description:
 Event Organize is an application that allows users to send and receive invitations.
 
 
 ### Technologies used:
-- css
-- Html
+- CSS
+- HTML
 - Nodejs
 - MongoDB
 - Mongoose
@@ -19,12 +19,13 @@ Event Organize is an application that allows users to send and receive invitatio
 ### Getting Started
 
 ### Trello
-(https://trello.com/b/Icpr5auL)
+
+follow the project phases in [trello](https://trello.com/b/Icpr5auL)
 
 ### ERD:
 ![](./assets/ERD.png)
 
-### Screenshots
+## WireFrames
 ### Home page
 ![](./assets/Welcome%20Page.png)
 ### Dashboard Guest
