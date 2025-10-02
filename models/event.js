@@ -19,11 +19,11 @@ const eventSchema = new mongoose.Schema({
   },
   eventStatus:{
     type:String,
-    enum: ["draft", "sent", "completed"]
+    enum: ["Draft", "Sent", "Completed"]
   },
   scope:{
     type:String,
-    enum: ["public", "private"]
+    enum: ["Public", "Private"]
   },
   limit:{
     type: Number
