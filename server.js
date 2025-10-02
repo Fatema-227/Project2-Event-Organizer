@@ -1,44 +1,48 @@
-const express=require("express")
-
-const app=express()
-app.use(express.urlencoded())
-
 require("dotenv").config()
+const express = require("express")
+const methodOverride = require("method-override")
+const morgan = require("morgan")
+const session = require("express-session")
+const passUserToView = require('./middleware/pass-user-to-view')
+const isSignIn = require("./middleware/is-signed-in")
 
-const mongoose=require("./config/db")
+const app = express()
 
-const methodOverride=require("method-override")
+// Database configurations
+const mongoose = require("./config/db")
+
+// Set the port from environment variable or default to 3000
+const port = process.env.PORT ? process.env.PORT : "3000"
+
+// Use MiddleWare
+app.use(express.urlencoded())
 app.use(methodOverride("_method"))
-
-const morgan=require("morgan")
 app.use(morgan("dev"))
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+)
+app.use(passUserToView)
 
-const session=require("express-session")
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true
-}))
-
-// const passUserToView=require("./middleware/pas-user-to-view")
-// app.use(passUserToView)
-
-// const isSignedIn = require("./middleware/is-signed-in")
-
-const authRouter=require("./routes/auth")
-app.use("/auth",authRouter)
-
-// const listenRouter=require("./routes/listing")
-// app.use("/listings",isSignedIn, listenRouter)
-
-app.get("/",(req,res)=>{
+// rout route
+app.get("/", async (req, res) => {
   res.render("index.ejs")
 })
-// app.get("/vip-lounge",isSignedIn,(req,res)=>{
-//   res.send(`Welcome to the party ${req.session.user.username}`)
-// })
 
-const port=process.env.PORT ? process.env.PORT:"3000"
-app.listen(port,()=>{
-console.log("app is listening")
+// Test Route
+app.get("/vip.lounge", isSignIn, (req, res) =>{
+  res.send(`Welcome to the Party ${req.session.user.username}`)
+})
+
+// Require Routes
+const authRouter = require("./routes/auth")
+
+// Use Router
+app.use("/auth", authRouter)
+
+app.listen(port, (req, res) => {
+  console.log(`The server is ready on port ${port}`)
 })
