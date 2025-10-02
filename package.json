@@ -1,4 +1,5 @@
 {
+  "name": "project2-event-organizer",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",
@@ -19,12 +20,26 @@
   },
   "repository": {
     "type": "git",
+    "url": "git+https://github.com/Fatema-227/Project2-Event-Organizer.git"
     "url": "git+https://github.com/Fatema-227/Project2-Event--Organizer.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
+    "url": "https://github.com/Fatema-227/Project2-Event-Organizer/issues"
+  },
+  "homepage": "https://github.com/Fatema-227/Project2-Event-Organizer#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.18.3",
+    "morgan": "^1.10.1"
+  }
     "url": "https://github.com/Fatema-227/Project2-Event--Organizer/issues"
   },
   "homepage": "https://github.com/Fatema-227/Project2-Event--Organizer#readme"
