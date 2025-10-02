@@ -39,9 +39,11 @@ app.get("/vip.lounge", isSignIn, (req, res) =>{
 
 // Require Routes
 const authRouter = require("./routes/auth")
+const userRouter = require("./routes/user")
 
 // Use Router
 app.use("/auth", authRouter)
+app.use("/user", userRouter)
 
 app.listen(port, (req, res) => {
   console.log(`The server is ready on port ${port}`)
