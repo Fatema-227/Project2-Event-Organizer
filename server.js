@@ -1,4 +1,5 @@
 const express=require("express")
+
 const app=express()
 app.use(express.urlencoded())
 
@@ -12,12 +13,12 @@ app.use(methodOverride("_method"))
 const morgan=require("morgan")
 app.use(morgan("dev"))
 
-const session=require("express-session")
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true
-}))
+// const session=require("express-session")
+// app.use(session({
+//   secret: process.env.SESSION_SECRET,
+//   resave: false,
+//   saveUninitialized: true
+// }))
 
 // const passUserToView=require("./middleware/pas-user-to-view")
 // app.use(passUserToView)
