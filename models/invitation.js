@@ -19,5 +19,6 @@ const invitationSchema = new mongoose.Schema({
   }
 )
 
+
 const UserEvent = mongoose.model("userEvent", user_eventSchema)
 module.exports = UserEvent
