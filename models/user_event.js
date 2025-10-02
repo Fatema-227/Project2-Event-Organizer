@@ -21,5 +21,5 @@ const user_eventSchema = new mongoose.Schema({
   }
 )
 
-const UserEvent = mongoose.model("userEvent", user_eventSchema)
+const UserEvent = mongoose.model("UserEvent", user_eventSchema)
 module.exports = UserEvent
