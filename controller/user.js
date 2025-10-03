@@ -28,3 +28,8 @@ exports.user_update_put = async (req, res) => {
   await user.updateOne(req.body)
   res.redirect("/")
 }
+
+exports.getUserById=async(req,res)=>{
+  const userId=await User.findById(req.params.userId)
+  res.send(`User with Id:${userId}`)
+}
