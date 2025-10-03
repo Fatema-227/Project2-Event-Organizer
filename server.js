@@ -32,18 +32,17 @@ app.get("/", async (req, res) => {
   res.render("index.ejs")
 })
 
-// Test Route
-app.get("/vip.lounge", isSignIn, (req, res) =>{
-  res.send(`Welcome to the Party ${req.session.user.username}`)
-})
 
 // Require Routes
 const authRouter = require("./routes/auth")
 const userRouter = require("./routes/user")
+const eventRouter=require("./routes/event")
 
 // Use Router
 app.use("/auth", authRouter)
 app.use("/user", userRouter)
+app.use("/events",eventRouter)
+
 
 app.listen(port, (req, res) => {
   console.log(`The server is ready on port ${port}`)

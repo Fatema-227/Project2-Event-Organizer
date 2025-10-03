@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { boolean } = require('webidl-conversions')
 
 const eventSchema = new mongoose.Schema({
   title:{
@@ -7,7 +8,6 @@ const eventSchema = new mongoose.Schema({
   },
   description:{
     type: String,
-    required: true
   },
   dateTime:{
     type: Date,
@@ -21,9 +21,8 @@ const eventSchema = new mongoose.Schema({
     type:String,
     enum: ["Draft", "Sent", "Completed"]
   },
-  scope:{
-    type:String,
-    enum: ["Public", "Private"]
+  isPublic:{
+    type:Boolean,
   },
   limit:{
     type: Number
@@ -31,7 +30,6 @@ const eventSchema = new mongoose.Schema({
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
   }
 },
   {
