@@ -35,9 +35,12 @@ app.get("/", async (req, res) => {
 
 // Require Routes
 const authRouter = require("./routes/auth")
+const userRouter = require("./routes/user")
 const eventRouter=require("./routes/event")
+
 // Use Router
 app.use("/auth", authRouter)
+app.use("/user", userRouter)
 app.use("/events",eventRouter)
 
 

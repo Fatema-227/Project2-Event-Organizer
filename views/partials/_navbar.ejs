@@ -2,6 +2,8 @@
   <% if(user){ %>
   <p>Welcome to Auth App! <%= user.username %>.</p>
   <a href="/auth/sign-out"> Sign Out </a><br>
+    <a href="/user/<%= user._id %>">My Profile</a>
+
     <% }else { %>
   <p>Welcome to Auth App! Guest.</p>
   <a href="/auth/sign-up"> Sign Up </a><br>
