@@ -1,2 +1,6 @@
-events index
-<a href="/events/new">Create new event</a>
+<%-include("../partials/_navbar.ejs")%>
+<%events.forEach((event)=>{%>
+<ul>
+  <li><a href="/events/<%=event._id%>"><%=event.title%></a></li>
+</ul>
+<%})%>
