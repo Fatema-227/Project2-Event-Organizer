@@ -36,7 +36,7 @@ app.get("/", async (req, res) => {
 // Require Routes
 const authRouter = require("./routes/auth")
 const userRouter = require("./routes/user")
-const user_eventRouter=require("./routes/userEventCtrl")
+const user_eventRouter=require("./routes/userEventRouter")
 const eventRouter=require("./routes/event")
 const invitationRouter=require("./routes/invitation")
 
