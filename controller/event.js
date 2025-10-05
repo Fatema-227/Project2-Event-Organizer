@@ -14,3 +14,7 @@ exports.event_new_post = async (req, res) => {
   await Event.create(req.body)
   res.redirect("/events")
 }
+exports.app_show_get=async(req,res)=>{
+  const events = await Event.find().populate("user_id")
+  res.render("events/show.ejs",{events})
+}
