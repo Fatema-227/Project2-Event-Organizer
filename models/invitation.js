@@ -21,5 +21,5 @@ const invitationSchema = new mongoose.Schema({
 
 
 
-const UserEvent = mongoose.model("userEvent", user_eventSchema)
-module.exports = UserEvent
+const Invitation = mongoose.model("Invitation", invitationSchema)
+module.exports = Invitation

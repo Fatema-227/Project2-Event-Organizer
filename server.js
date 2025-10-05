@@ -38,12 +38,14 @@ const authRouter = require("./routes/auth")
 const userRouter = require("./routes/user")
 const user_eventRouter=require("./routes/userEventCtrl")
 const eventRouter=require("./routes/event")
+const invitationRouter=require("./routes/invitation")
 
 // Use Router
 app.use("/auth", authRouter)
 app.use("/user", userRouter)
 app.use("/userEvent",user_eventRouter)
 app.use("/events",eventRouter)
+app.use("/invitations", invitationRouter )
 
 
 app.listen(port, (req, res) => {
