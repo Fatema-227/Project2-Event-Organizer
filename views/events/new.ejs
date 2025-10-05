@@ -15,15 +15,43 @@
   <label for="isPublic">Is public?</label>
   <input type="checkbox" name="isPublic" id="isPublic" />
   <br />
-  <label for="eventStatus">Event status</label>
+  <div  id="limitContainer" style="display: none">
+    <label for="limit">Guests limit</label>
+    <input type="number" name="limit" id="limit"/>
+    <br />
+  </div>
+<input type="text" name="eventStatus" id="eventStatus" value="draft" hidden>
+  <!-- <label for="eventStatus">Event status</label>
   <select name="eventStatus" id="eventStatus">
     <option value="Draft">Draft</option>
     <option value="Sent">Sent</option>
     <option value="Completed">Completed</option>
   </select>
-  <br />
-  <label for="limit">Guests limit</label>
-  <input type="number" name="limit" id="limit" />
-  <br />
-  <button type="submit">Create</button>
+  <br /> -->
+  <button type="submit" id="draft">Draft</button>
+  <button type="submit" id="send">Create invitation</button>
+
 </form>
+
+  <script>
+    const isPublic = document.getElementById("isPublic")
+    const guestsLimit = document.getElementById("limitContainer")
+    let draftButton=document.querySelector("#draft")
+    let sendButton=document.querySelector("#send")
+    let status=document.querySelector("#eventStatus")
+    isPublic.addEventListener("change", () => {
+      if (isPublic.checked) {
+        limitContainer.style.display = "block"
+        document.getElementById("limit").required=true
+      } else {
+        limitContainer.style.display = "none"
+        document.getElementById("limit").value = ""
+      }
+    })
+    draftButton.addEventListener(("click"),()=>{
+      status.value="Draft"
+    })
+    sendButton.addEventListener(("click"),()=>{
+      status.value="Sent"
+    })
+  </script>
