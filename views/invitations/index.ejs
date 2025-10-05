@@ -1,46 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Invitation</title>
+  <title>All Invitation</title>
 </head>
 <body>
-  <h2>Title of Event: </h2>
-  <p><b>Description: </b></p>
-  <p><b>Date and Time: </b></p>
-  <p><b>Location: </b></p>
-  <label><b>Select the guest</b></label>
-  <select name="guests"  id="guests" >
-    <% allUsers.forEach (user => { %>
-    <option value="<%= user._id %>"><%= user.username%></option>
-  <% }) %>
-  </select>
-  <button class="add-guest" type="submit">Add This Guest</button>
-  <h4>All Guests</h4>
-  <div class="list-guests"></div>
-
-    <script>
-      const listUserName = document.querySelectorAll('#guests')
-      const addButton = document.querySelector('.add-guest')
-      const allGuests = []
-      const addNewGuest = () =>{
-        listUserName.forEach(item => {
-          // reference: https://stackoverflow.com/questions/1085801/get-selected-value-in-dropdown-list-using-javascript
-          const selected = item.value
-          const selectedName = item.options[item.selectedIndex].text
-          if(selectedName){
-          allGuests.push(selectedName)
-        }
-        })
-        const result = document.createElement('p')
-        result.innerText = allGuests
-        document.querySelector('.list-guests').appendChild(result)
-        if(result){
-          allGuests.pop()
-        }
-      }
-      addButton.addEventListener('click', addNewGuest)
-    </script>
+  <h1>hhhhhhhhhhhhhhh</h1>
 </body>
 </html>
