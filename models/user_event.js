@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const user_eventSchema = new mongoose.Schema({
-  eventStatus:{
+  role:{
     type:String,
     enum: ["Organizer", "VIPGuest", "RegularGuest", "Helper"]
   },

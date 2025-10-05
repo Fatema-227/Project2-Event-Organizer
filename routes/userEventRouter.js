@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const userEventCtrl = require("../controller/userEventCtrl")
+const userEventCtrl = require("../controller/userEvent")
 
 router.get("/event", userEventCtrl.getAllEvents)
 router.get("/ids", userEventCtrl.userEvent_ids_get)
