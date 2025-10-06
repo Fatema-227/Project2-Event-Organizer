@@ -18,13 +18,13 @@
     <p><%= eventTime  %></p>
     <p><%= event.address  %></p>
     <label><b>Select the guest</b></label>
-    <select name="guests"  id="guests" >
+    <select name="guests"  id="guests" multiple>
       <option value="">---Select Your Guest---</option>
       <% allUsers.forEach (user => { %>
       <option value="<%= user._id %>"><%= user.username%></option>
     <% }) %>
     </select>
-    <button class="add-guest" type="button">Add This Guest</button>
+    <button class="add-guest" type="button">Add This Guest</button><p>*can select guests one time</p>
     <h4>All Guests</h4>
     <div class="list-guests"></div>
 
@@ -39,23 +39,23 @@
       const addNewGuest = () =>{
         listUserName.forEach(item => {
           // reference: https://stackoverflow.com/questions/1085801/get-selected-value-in-dropdown-list-using-javascript
-          const selected = item.value
-          const selectedName = item.options[item.selectedIndex].text
-          if(selectedName && selectedName !== "---Select Your Guest---"){
-          allGuests.push(selectedName.toUpperCase())
-        }
+          const selectedOptions = item.selectedOptions
+          for (let i = 0; i < selectedOptions.length; i++) {
+            const selectedName = selectedOptions[i].text
+            if (selectedName && selectedName !== "---Select Your Guest---" &&
+            addButton.style.cursor !== "not-allowed") {
+              allGuests.push(selectedName.toUpperCase())
+            }
+          }
         })
         if(allGuests.length > 0){
           const result = document.createElement('p')
-          const hyperLink = document.createElement('a')
           result.classList.add("my-guest")
           result.innerText = allGuests
-          hyperLink.setAttribute("href", "/userEvent/ids")
-          hyperLink.innerHTML = "Role"
           document.querySelector('.list-guests').appendChild(result)
-          result.appendChild(hyperLink)
           if(result){
-            allGuests.pop()
+            allGuests.length = 0
+            addButton.style.cursor = "not-allowed"
           }
         }
 

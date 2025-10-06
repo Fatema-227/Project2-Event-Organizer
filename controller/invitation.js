@@ -14,6 +14,7 @@ exports.invitation_new_get = async (req, res) => {
 }
 
 exports.invitation_new_post = async (req, res) => {
-  const infoInvitation = await invitationOrganizer.create(req.body)
+  req.body.user_id = req.session.user._id
+  await invitationOrganizer.create(req.body)
   res.render("../views/index.ejs")
 }
