@@ -16,6 +16,8 @@ const port = process.env.PORT ? process.env.PORT : "3000"
 
 // Use MiddleWare
 app.use(express.urlencoded())
+app.use(express.json())
+app.use(express.static("public"))
 app.use(methodOverride("_method"))
 app.use(morgan("dev"))
 app.use(

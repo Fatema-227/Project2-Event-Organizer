@@ -20,16 +20,24 @@ exports.user_update_put = async (req, res) => {
     if (req.body.password !== req.body.confirmPassword) {
       return res.send("Password and confirm password must match.")
     }
-    // Password Encrypting
-    const hashedPassword = bcrypt.hashSync(req.body.password, 10)
-    // means 10 is: encrypt for 10 times, can use between 5 to 10
-    req.body.password = hashedPassword
   }
-  await user.updateOne(req.body)
-  res.redirect("/")
 }
 
-exports.getUserById=async(req,res)=>{
-  const userId=await User.findById(req.params.userId)
-  res.send(`User with Id:${userId}`)
+exports.update_password = async (req, res) => {
+  console.log("here...")
+  const user = await User.findById(req.params.userId)
+  if (!user) return res.send("User does not exists!")
+
+  const validatePassword = bcrypt.compareSync(
+    req.body.oldPassword,
+    user.password
+  )
+  if (!validatePassword) return res.send("Your Old Password is not correct")
+  if (req.body.newPassword != req.body.confirmPassword)
+    return res.send("Password and Confirm Password must match")
+  const hashedPass = bcrypt.hashSync(req.body.newPassword, 10)
+  user.password = hashedPass
+  await user.save()
+
+  res.send("password updated")
 }
