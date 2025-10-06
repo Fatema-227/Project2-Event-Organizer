@@ -1,25 +1,41 @@
-<%- include("../partials/_navbar")  %>
+<%- include("../partials/_navbar") %>
 <h1>Update User Information</h1>
-<form action="/user/<%= user._id %>?_method=PUT" method="post">
+<form action="/user/<%= user._id %>/edit?_method=PUT" method="post">
   <label for="username"> username </label>
-  <input type="text" name="username" id="firstname" value="<%= user.username %>" required>
-  <br><br>
+  <input
+    type="text"
+    name="username"
+    id="firstname"
+    value="<%= user.username %>"
+    required
+  />
+  <br /><br />
 
   <label for="email"> Email </label>
-  <input type="email" name="email" id="email" value="<%= user.email %>" required>
-  <br><br>
+  <input
+    type="email"
+    name="email"
+    id="email"
+    value="<%= user.email %>"
+    required
+  />
+  <br /><br />
+
+  <label> Old Password </label>
+  <input type="oldPassword" name="oldPassword" id="oldPassword" required />
+  <br /><br />
 
   <label> Password </label>
-  <input type="password" name="password" id="password" value="<%= user.password %>" required>
-  <br><br>
+  <input type="password" name="password" id="password" required />
+  <br /><br />
 
   <label> Confirm Password </label>
-  <input type="password" name="confirmPassword" id="confirmPassword" value="<%= user.password %>" required>
-  <br><br>
+  <input type="password" name="confirmPassword" id="confirmPassword" required />
+  <br /><br />
 
   <label for="picture"> Profile Picture </label>
-  <input type="text" name="picture" id="picture" value="<%= user.picture %>">
-  <br><br>
+  <input type="text" name="picture" id="picture" value="<%= user.picture %>" />
+  <br /><br />
 
-  <button type="submit"> Update </button><br><br>
+  <button type="submit">Update</button><br /><br />
 </form>

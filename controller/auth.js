@@ -18,7 +18,7 @@ exports.auth_signup_post = async (req, res) => {
   req.body.password = hashedPassword
 
   const user = await User.create(req.body)
-  res.send(`Thanks for signing up ${user.username}`)
+  res.send(`Thanks for signing up ${user.username}.<br><a href="/">Home</a>`)
 }
 
 exports.auth_signin_get = async (req, res) => {
@@ -44,27 +44,27 @@ exports.auth_signin_post = async (req, res) => {
     _id: userInDatabase._id,
   }
 
-  res.render("index.ejs", {user:req.session.user})
+  res.redirect("/")
 }
 
 exports.auth_signout_get = async (req, res) => {
   req.session.destroy()
   res.redirect("/auth/sign-in")
 }
-exports.auth_updatePassword_get=async(req,res)=>{
-  const user = await User.findById(req.params.id)
-  res.render("/auth/update-password",{user})
-}
-exports.updatePassword = async (req, res) => {
-  const user = await User.findById(req.params.id)
-  const isMatch = bcrypt.compareSync(req.body.oldPassword, user.password)
-  if (!isMatch) {
-    return res.send("Old password is incorrect")
-  }
+// exports.auth_updatePassword_get=async(req,res)=>{
+//   const user = await User.findById(req.params.id)
+//   res.render("auth/update-password",{user})
+// }
+// exports.updatePassword = async (req, res) => {
+//   const user = await User.findById(req.params.id)
+//   const isMatch = bcrypt.compareSync(req.body.oldPassword, user.password)
+//   if (!isMatch) {
+//     return res.send("Old password is incorrect")
+//   }
 
-  const hashedNewPassword = bcrypt.hashSync(req.body.newPassword)
-  user.password = hashedNewPassword
-  await user.save()
+//   const hashedNewPassword = bcrypt.hashSync(req.body.newPassword)
+//   user.password = hashedNewPassword
+//   await user.save()
 
-  res.send("Password updated successfully")
-}
+//   res.send("Password updated successfully")
+// }
