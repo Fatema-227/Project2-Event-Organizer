@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show Invitation</title>
+</head>
+<body>
+  <form action="/invitations" method="post">
+    <h2><%= invitations.event_id.title  %></h2>
+    <p><%= invitations.event_id.description  %></p>
+    <% const eventDateTime = invitations.event_id.dateTime.toString()
+      const eventDate = eventDateTime.substring(0, 15) // split the string so return string
+      const eventTime = eventDateTime.substring(16, 25)
+    %>
+    <p><%= eventDate  %></p>
+    <p><%= eventTime  %></p>
+    <p><%= invitations.event_id.address  %></p>
+    <h4>All Guests</h4>
+    <% invitations.guests.forEach((user)=>{%>
+    <ul>
+      <li><%= user.username.toUpperCase() %>&nbsp;&nbsp;<a href="/userEvent/ids">Role</a></li>
+    </ul>
+    <%})%>
+
+    <button type="submit">Edit Invitation</button>
+    <button type="submit">Preview Invitation</button>
+  </form>

@@ -2,6 +2,11 @@
   <title>All Invitation</title>
 </head>
 <body>
-  <h1>hhhhhhhhhhhhhhh</h1>
+  <%-include("../partials/_navbar.ejs")%>
+  <% invitations.forEach((invitation)=>{%>
+<ul>
+  <li><a href="/invitations/<%= invitation._id%>"><%= invitation.event_id.title %> Invitation</a></li>
+</ul>
+<%})%>
 </body>
 </html>

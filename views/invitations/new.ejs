@@ -17,14 +17,14 @@
     <p><%= eventDate  %></p>
     <p><%= eventTime  %></p>
     <p><%= event.address  %></p>
-    <label><b>Select the guest</b></label>
+    <label><b>Select the guest</b>&nbsp;*can select guests one time</label><br>
     <select name="guests"  id="guests" multiple>
       <option value="">---Select Your Guest---</option>
       <% allUsers.forEach (user => { %>
       <option value="<%= user._id %>"><%= user.username%></option>
     <% }) %>
     </select>
-    <button class="add-guest" type="button">Add This Guest</button><p>*can select guests one time</p>
+    <button class="add-guest" type="button">Add This Guest</button>
     <h4>All Guests</h4>
     <div class="list-guests"></div>
 
@@ -38,7 +38,7 @@
       const allGuests = []
       const addNewGuest = () =>{
         listUserName.forEach(item => {
-          // reference: https://stackoverflow.com/questions/1085801/get-selected-value-in-dropdown-list-using-javascript
+          // reference: https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions
           const selectedOptions = item.selectedOptions
           for (let i = 0; i < selectedOptions.length; i++) {
             const selectedName = selectedOptions[i].text
