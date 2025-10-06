@@ -9,10 +9,6 @@ const eventSchema = new mongoose.Schema({
   description:{
     type: String,
   },
-  dateTime:{
-    type: Date,
-    required: true
-  },
   address:{
     type: String,
     required: true
@@ -26,6 +22,12 @@ const eventSchema = new mongoose.Schema({
   },
   limit:{
     type: Number
+  },
+  time:{
+    type: String,
+  },
+  date:{
+    type: String,
   },
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
