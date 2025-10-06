@@ -1,66 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Invitation</title>
-</head>
-<body>
-  <form action="/invitations" method="post">
-    <input type="hidden" name="event_id" value="<%= event._id %>">
-    <h2><%= event.title  %></h2>
-    <p><%= event.description  %></p>
-    <% const eventDateTime = event.dateTime.toString()
-      const eventDate = eventDateTime.substring(0, 15) // split the string so return string
-      const eventTime = eventDateTime.substring(16, 25)
-    %>
-    <p><%= eventDate  %></p>
-    <p><%= eventTime  %></p>
-    <p><%= event.address  %></p>
-    <label><b>Select the guest</b>&nbsp;*can select guests one time</label><br>
-    <select name="guests"  id="guests" multiple>
-      <option value="">---Select Your Guest---</option>
-      <% allUsers.forEach (user => { %>
-      <option value="<%= user._id %>"><%= user.username%></option>
-    <% }) %>
-    </select>
-    <button class="add-guest" type="button">Add This Guest</button>
-    <h4>All Guests</h4>
-    <div class="list-guests"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Invitation</title>
+  </head>
+  <body>
+    <form action="/invitations" method="post">
+      <input type="hidden" name="event_id" value="<%= event._id %>" />
+      <h2><%= event.title %></h2>
+      <p><%= event.description %></p>
+      <% const eventDateTime = event.dateTime.toString() const eventDate =
+      eventDateTime.substring(0, 15) // split the string so return string const
+      eventTime = eventDateTime.substring(16, 25) %>
+      <p><%= eventDate %></p>
+      <p><%= eventTime %></p>
+      <p><%= event.address %></p>
+      <label><b>Select the guest</b>&nbsp;*can select guests one time</label
+      ><br />
+      <select name="guests" id="guests" multiple>
+        <option value="">---Select Your Guest---</option>
+        <% allUsers.forEach (user => { %>
+        <option value="<%= user._id %>"><%= user.username%></option>
+        <% }) %>
+      </select>
+      <button class="add-guest" type="button">Add This Guest</button>
+      <h4>All Guests</h4>
+      <div class="list-guests"></div>
 
-    <button type="submit">Create invitation</button>
-  </form>
-
+      <button type="submit">Create invitation</button>
+    </form>
 
     <script>
-      const listUserName = document.querySelectorAll('#guests')
-      const addButton = document.querySelector('.add-guest')
+      const listUserName = document.querySelector("#guests")
+      const addButton = document.querySelector(".add-guest")
       const allGuests = []
-      const addNewGuest = () =>{
-        listUserName.forEach(item => {
-          // reference: https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions
-          const selectedOptions = item.selectedOptions
-          for (let i = 0; i < selectedOptions.length; i++) {
-            const selectedName = selectedOptions[i].text
-            if (selectedName && selectedName !== "---Select Your Guest---" &&
-            addButton.style.cursor !== "not-allowed") {
-              allGuests.push(selectedName.toUpperCase())
-            }
+      const addNewGuest = () => {
+        // reference: https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions
+        const selectedOptions = listUserName.selectedOptions
+        for (let i = 0; i < selectedOptions.length; i++) {
+          const selectedName = selectedOptions[i].text
+          if (
+            selectedName &&
+            selectedName !== "---Select Your Guest---" &&
+            addButton.style.cursor !== "not-allowed"
+          ) {
+            allGuests.push(selectedName.toUpperCase())
           }
-        })
-        if(allGuests.length > 0){
-          const result = document.createElement('p')
+        }
+        if (allGuests.length > 0) {
+          const result = document.createElement("p")
           result.classList.add("my-guest")
           result.innerText = allGuests
-          document.querySelector('.list-guests').appendChild(result)
-          if(result){
+          document.querySelector(".list-guests").appendChild(result)
+          if (result) {
             allGuests.length = 0
             addButton.style.cursor = "not-allowed"
           }
         }
-
       }
-      addButton.addEventListener('click', addNewGuest)
+      addButton.addEventListener("click", addNewGuest)
     </script>
-</body>
+  </body>
 </html>
