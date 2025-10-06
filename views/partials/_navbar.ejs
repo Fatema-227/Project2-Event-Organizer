@@ -1,10 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>  Event Organizer App </title>
+</head>
+<body>
+  <header>
+
 <nav>
-  <% if(user){ %>
-  <p>Welcome to Auth App! <%= user.username %>.</p>
-  <a href="/auth/sign-out"> Sign Out </a><br>
-    <% }else { %>
-  <p>Welcome to Auth App! Guest.</p>
-  <a href="/auth/sign-up"> Sign Up </a><br>
-  <a href="/auth/sign-in"> Sign In </a>
+<% if (!user) { %>
+<a href="/auth/sign-up"> Sign up </a>
+<a href="/auth/sign-in"> Sign in </a>
+<% } else { %>
+  <p>Welcome to event organizer App! <%= user.username %>.</p>
+  <a href="/auth/sign-out"> Sign Out </a><br />
+  <a href="/user/<%= user._id %>">My Profile</a> <br>
+  <a href="/events">Go to the events</a> <br>
+  <a href="/events/new">Create new event</a><br>
+  <a href="/userEvent/ids">Role</a>
   <% } %>
 </nav>
+  </header>
+<main>
+</main>
+
+</body>
+</html>

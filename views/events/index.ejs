@@ -1,0 +1,6 @@
+<%-include("../partials/_navbar.ejs")%>
+<%events.forEach((event)=>{%>
+<ul>
+  <li><a href="/events/<%=event._id%>"><%=event.title%> | <%=event.eventStatus%></a></li>
+</ul>
+<%})%>
