@@ -5,7 +5,6 @@ const morgan = require("morgan")
 const session = require("express-session")
 const passUserToView = require('./middleware/pass-user-to-view')
 const isSignIn = require("./middleware/is-signed-in")
-
 const app = express()
 
 // Database configurations
@@ -16,8 +15,6 @@ const port = process.env.PORT ? process.env.PORT : "3000"
 
 // Use MiddleWare
 app.use(express.urlencoded())
-app.use(express.json())
-app.use(express.static("public"))
 app.use(methodOverride("_method"))
 app.use(morgan("dev"))
 app.use(

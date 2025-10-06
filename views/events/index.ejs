@@ -1,6 +1,25 @@
 <%-include("../partials/_navbar.ejs")%>
-<%events.forEach((event)=>{%>
+<h2>Public events</h2>
+<%publicEvent.forEach((event)=>{ if(event.isPublic &&
+event.eventStatus!=="draft"){%>
 <ul>
-  <li><a href="/events/<%=event._id%>"><%=event.title%> | <%=event.eventStatus%></a></li>
+  <li>
+    <%if (event.eventStatus==="Completed" && ){%> <%=event.title%> |
+    <%=event.eventStatus%> | Will be held on <%=event.date%> at <%=event.time%>
+    | Created by : <%=user.username%> <%}
+    else{%><a href="/events/<%=event._id%>"
+      ><%=event.title%> | <%=event.eventStatus%> | Will be held on
+      <%=event.date%> at <%=event.time%> | Created by : <%=user.username%></a
+    ><%}%>
+  </li>
 </ul>
-<%})%>
+<%}})%>
+
+<h2>My events</h2>
+<%events.forEach((event)=>{ if(!event.isPublic){%>
+<ul>
+  <li>
+    <a href="/events/<%=event._id%>"><%=event.title%> | <%=event.eventStatus%></a>
+  </li>
+</ul>
+<%}})%>
