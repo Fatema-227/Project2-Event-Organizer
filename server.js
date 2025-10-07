@@ -8,6 +8,7 @@ const session = require("express-session")
 const passUserToView = require('./middleware/pass-user-to-view')
 const isSignIn = require("./middleware/is-signed-in")
 const app = express()
+const upload=require("./middleware/upload")
 
 
 // Database configurations
