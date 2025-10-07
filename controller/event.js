@@ -1,8 +1,9 @@
 const Event = require("../models/event")
 const User=require("../models/user")
 exports.event_index_get = async (req, res) => {
-  const publicEvent=await Event.find()
+  const publicEvent=await Event.find().populate("user_id")
   const events = await Event.find({user_id: req.session.user._id}).populate("user_id")
+  let userInSession=req.session.user._id
   //this part from chatGPT
   const now = new Date()
   for (let ev of events) {
@@ -20,7 +21,7 @@ exports.event_index_get = async (req, res) => {
       await ev.save();
     }
   }
-  res.render("events/index.ejs", { events, publicEvent})
+  res.render("events/index.ejs", { events, publicEvent, userInSession})
 }
 exports.event_new_get = async (req, res) => {
   res.render("events/new.ejs")

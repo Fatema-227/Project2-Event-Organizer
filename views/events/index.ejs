@@ -4,13 +4,17 @@
 event.eventStatus!=="draft"){%>
 <ul>
   <li>
-    <%if (event.eventStatus==="Completed" && ){%> <%=event.title%> |
-    <%=event.eventStatus%> | Will be held on <%=event.date%> at <%=event.time%>
-    | Created by : <%=user.username%> <%}
-    else{%><a href="/events/<%=event._id%>"
-      ><%=event.title%> | <%=event.eventStatus%> | Will be held on
-      <%=event.date%> at <%=event.time%> | Created by : <%=user.username%></a
-    ><%}%>
+ <% if(event.eventStatus =="Completed" && event.user_id._id == user._id){%>
+  <a href="/events/<%=event._id%>"><%=event.title%> | <%=event.eventStatus%> | Will be held on <%=event.date%> at <%=event.time%> | Created by : <%=event.user_id.username %></a>
+  <%}
+else if (event.eventStatus =="Completed" && event.user_id._id !== user._id){%>
+  <%=event.title%> | <%=event.eventStatus%> | Will be held on <%=event.date%> at <%=event.time%> | Created by : <%=event.user_id.username %>
+<%}
+
+else if (event.eventStatus =="Draft" && event.user_id._id == user._id){%>
+  <a href="/events/<%=event._id%>"><%=event.title%> | <%=event.eventStatus%> | Will be held on <%=event.date%> at <%=event.time%> | Created by : <%=event.user_id.username %></a>
+<%}%>
+
   </li>
 </ul>
 <%}})%>
