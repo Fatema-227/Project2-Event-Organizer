@@ -1,11 +1,15 @@
 require("dotenv").config()
 const express = require("express")
+const multer=require("multer")
+const path=require("path")
 const methodOverride = require("method-override")
 const morgan = require("morgan")
 const session = require("express-session")
 const passUserToView = require('./middleware/pass-user-to-view')
 const isSignIn = require("./middleware/is-signed-in")
 const app = express()
+const upload=require("./middleware/upload")
+
 
 // Database configurations
 const mongoose = require("./config/db")
@@ -25,6 +29,8 @@ app.use(
   })
 )
 app.use(passUserToView)
+app.use(express.static('public'))
+
 
 // rout route
 app.get("/", async (req, res) => {

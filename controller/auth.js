@@ -13,7 +13,7 @@ exports.auth_signup_post = async (req, res) => {
   if (req.body.password !== req.body.confirmPassword) {
     return res.send("Password and confirm password must match")
   }
-
+req.body.picture=req.file.filename
   const hashedPassword = bcrypt.hashSync(req.body.password, 10)
   req.body.password = hashedPassword
 
@@ -51,20 +51,3 @@ exports.auth_signout_get = async (req, res) => {
   req.session.destroy()
   res.redirect("/auth/sign-in")
 }
-// exports.auth_updatePassword_get=async(req,res)=>{
-//   const user = await User.findById(req.params.id)
-//   res.render("auth/update-password",{user})
-// }
-// exports.updatePassword = async (req, res) => {
-//   const user = await User.findById(req.params.id)
-//   const isMatch = bcrypt.compareSync(req.body.oldPassword, user.password)
-//   if (!isMatch) {
-//     return res.send("Old password is incorrect")
-//   }
-
-//   const hashedNewPassword = bcrypt.hashSync(req.body.newPassword)
-//   user.password = hashedNewPassword
-//   await user.save()
-
-//   res.send("Password updated successfully")
-// }

@@ -1,6 +1,6 @@
 <%- include("../partials/_navbar.ejs") %>
 <h1>Create a new account</h1>
-<form action="/auth/sign-up" method="post">
+<form action="/auth/sign-up" method="post" enctype="multipart/form-data">
   <label for="username">Username</label>
   <input type="text" name="username" id="userName" />
   <br />
