@@ -24,5 +24,7 @@
     <%})%>
 
     <button type="submit"><a href="/invitations/edit/<%= invitations._id %>">Edit Invitation</a></button>
+    <% if(invitations.sendInvitation === "default"){ %>
     <button type="submit">Send Invitation</button>
+    <% } %>
   </form>

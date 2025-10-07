@@ -14,7 +14,7 @@ exports.invitation_new_get = async (req, res) => {
   // reference https://stackoverflow.com/questions/4299991/how-to-sort-in-mongoose
   const users = await User.find({}).sort('username')
   const currentUser = req.session.user._id
-  const allUsers = users.filter((user) => user._id.equals(!currentUser))
+  const allUsers = users.filter((user) => user._id.toString() !== currentUser.toString())
 
   const event = await Event.findById(req.params.eventId)
   res.render("invitations/new.ejs", {allUsers, event})
@@ -22,6 +22,7 @@ exports.invitation_new_get = async (req, res) => {
 
 exports.invitation_new_post = async (req, res) => {
   req.body.user_id = req.session.user._id
+  const event = await Event.findById(req.params.eventId)
   await invitationOrganizer.create(req.body)
   res.render("../views/index.ejs")
 }
@@ -35,7 +36,7 @@ exports.invitation_edit_get = async (req, res) => {
   const invitations = await invitationOrganizer.findById(req.params.invitationId).populate("event_id").populate("guests")
   const users = await User.find({}).sort('username')
   const currentUser = req.session.user._id
-  const allUsers = users.filter((user) => user._id.equals(!currentUser))
+  const allUsers = users.filter((user) => user._id.toString() !== currentUser.toString())
 
   res.render("invitations/edit.ejs", {invitations, allUsers})
 }

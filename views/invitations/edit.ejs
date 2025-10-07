@@ -30,7 +30,7 @@
     <label><b>Add other guest</b>&nbsp;*can select guests one time</label><br>
     <select name="guests"  id="guests" multiple>
       <% allUsers.forEach (user => { %>
-      <% const specificUser = invitations.guests.some(guest => guest._id.toString() === user._id.toString()); %>
+      <% const specificUser = invitations.guests.some(guest => guest._id.equals(user._id)) %>
       <% if (!specificUser) { %>
       <option value="<%= user._id %>"><%= user.username%></option>
       <% } %>
@@ -52,29 +52,27 @@
         for (let i = 0; i < selectedOptions.length; i++) {
           const selectedName = selectedOptions[i].text
 
-          if (selectedName && !allGuests.includes(selectedName.toUpperCase()) && addButton.style.cursor !== "not-allowed") {
+          if (selectedName && !allGuests.includes(selectedName.toUpperCase())) {
             allGuests.push(selectedName.toUpperCase())
           }
 
           if(allGuests.length > 0){
             const result = document.createElement('li')
-            const roleLink = document.createElement('a')
-
             result.innerHTML = selectedName.toUpperCase()
-            roleLink.setAttribute("href", "#")
-            roleLink.innerText = "Role"
-
             document.querySelector('.list-guests').appendChild(result)
-            result.appendChild(roleLink)
 
             if(result){
-              allGuests.length = 0
               addButton.style.cursor = "not-allowed"
             }
           }
         }
+        console.log(allGuests)
       }
-      addButton.addEventListener('click', addNewGuest)
+      addButton.addEventListener('click', () => {
+        if(addButton.style.cursor !== "not-allowed"){
+          addNewGuest()
+        }
+      })
     </script>
 </body>
 </html>

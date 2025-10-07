@@ -6,13 +6,14 @@
     <title>Create Invitation</title>
   </head>
   <body>
+    <%-include("../partials/_navbar.ejs")%>
     <form action="/invitations" method="post">
       <input type="hidden" name="event_id" value="<%= event._id %>" />
       <h2><%= event.title %></h2>
       <p><%= event.description %></p>
-      <% const eventDateTime = event.dateTime.toString() const eventDate =
-      eventDateTime.substring(0, 15) // split the string so return string const
-      eventTime = eventDateTime.substring(16, 25) %>
+      <% const eventDateTime = event.dateTime.toString() %>
+      <% const eventDate = eventDateTime.substring(0, 15) // split the string so return string const %>
+      <% const eventTime = eventDateTime.substring(16, 25) %>
       <p><%= eventDate %></p>
       <p><%= eventTime %></p>
       <p><%= event.address %></p>
@@ -26,7 +27,11 @@
       </select>
       <button class="add-guest" type="button">Add This Guest</button>
       <h4>All Guests</h4>
-      <div class="list-guests"></div>
+      <div>
+        <ul class="list-guests">
+
+        </ul>
+      </div>
 
       <button type="submit">Create invitation</button>
     </form>
@@ -49,7 +54,7 @@
           }
         }
         if (allGuests.length > 0) {
-          const result = document.createElement("p")
+          const result = document.createElement("li")
           result.classList.add("my-guest")
           result.innerText = allGuests
           document.querySelector(".list-guests").appendChild(result)
