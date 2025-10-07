@@ -32,11 +32,6 @@ exports.invitation_show_get = async (req, res) => {
   res.render("invitations/show.ejs", {invitations})
 }
 
-exports.invitation_delete_delete= async(req,res)=>{
-  const event = await invitationOrganizer.findByIdAndDelete(req.params.invitationId)
-  res.redirect("/invitations")
-}
-
 exports.invitation_edit_get = async (req, res) => {
   const invitations = await invitationOrganizer.findById(req.params.invitationId).populate("event_id").populate("guests")
   const users = await User.find({}).sort('username')
@@ -51,15 +46,21 @@ exports.invitation_edit_put = async (req, res) => {
   const invitationId = req.params.invitationId
   const newGuests = req.body.guests
 
-  const checkGuest = invitations.guests.some((guest) => {
-    return guest._id.equals(newGuests) //if user_id in guests is exit so return true
-  })
-
-  if(!checkGuest){
     const updatedGuests = await invitationOrganizer.findByIdAndUpdate(invitationId,
       {$push: {guests: newGuests}}
     )
-  }
+
   res.redirect(`/invitations/${invitationId}`)
 }
 
+exports.invitation_delete_delete= async(req,res)=>{
+  const invitations = await invitationOrganizer.findByIdAndDelete(req.params.invitationId)
+  res.redirect("/invitations")
+}
+
+exports.invitation_guest_delete= async(req,res)=>{
+  const deleteGuests = req.params.guestId
+  const invitations = await invitationOrganizer.findByIdAndDelete(
+      {$pull: {guests: deleteGuests}})
+  res.redirect('/invitations')
+}
