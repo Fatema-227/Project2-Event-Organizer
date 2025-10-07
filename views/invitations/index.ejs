@@ -4,9 +4,15 @@
 <body>
   <%-include("../partials/_navbar.ejs")%>
   <% invitations.forEach((invitation)=>{%>
+  <% if(invitation.user_id.equals(userId)){ %>
 <ul>
   <li><a href="/invitations/<%= invitation._id%>"><%= invitation.event_id.title %> Invitation</a></li>
 </ul>
-<%})%>
+<% } else if(invitation.sendInvitation === "Sent" && invitation.guests.some(guest => guest._id.equals(userId))) {%>
+<ul>
+  <li><a href="/invitations/showguest/<%= invitation._id%>"><%= invitation.event_id.title %> Invitation</a></li>
+</ul>
+  <% } %>
+<%  })  %>
 </body>
 </html>
