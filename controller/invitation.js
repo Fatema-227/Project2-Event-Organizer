@@ -6,48 +6,74 @@ const invitationOrganizer = require("../models/info_invitation")
 exports.invitation_index_get = async (req, res) => {
   const userId = req.session.user._id
   // reference: https://stackoverflow.com/questions/12821596/multiple-populates-mongoosejs
-  const invitations = await invitationOrganizer.find({user_id: userId}).populate("user_id").populate("event_id")
-  res.render("invitations/index.ejs", {invitations})
+  const invitations = await invitationOrganizer
+    .find({ user_id: userId })
+    .populate("user_id")
+    .populate("event_id")
+  res.render("invitations/index.ejs", { invitations })
 }
 
 exports.invitation_new_get = async (req, res) => {
   // reference https://stackoverflow.com/questions/4299991/how-to-sort-in-mongoose
-  const users = await User.find({}).sort('username')
+  const users = await User.find({}).sort("username")
   const currentUser = req.session.user._id
-  const allUsers = users.filter((user) => user._id.toString() !== currentUser.toString())
+  const allUsers = users.filter(
+    (user) => user._id.toString() !== currentUser.toString()
+  )
 
   const event = await Event.findById(req.params.eventId)
-  res.render("invitations/new.ejs", {allUsers, event})
+  res.render("invitations/new.ejs", { allUsers, event })
 }
 
 exports.invitation_new_post = async (req, res) => {
+  console.log("req.params.eventId", req.params.eventId)
+
   req.body.user_id = req.session.user._id
   const event = await Event.findById(req.params.eventId)
+  console.log(event)
+  if (event) {
+    console.log(event)
+
+    event.eventStatus = "Sent"
+    await event.save()
+  }
   await invitationOrganizer.create(req.body)
-  res.render("../views/index.ejs")
+  res.redirect("/invitations")
 }
 
 exports.invitation_show_get = async (req, res) => {
-  const invitations = await invitationOrganizer.findById(req.params.eventId).populate("event_id").populate("guests")
-  res.render("invitations/show.ejs", {invitations})
+  const invitations = await invitationOrganizer
+    .findById(req.params.eventId)
+    .populate("event_id")
+    .populate("guests")
+  res.render("invitations/show.ejs", { invitations })
 }
 
-exports.invitation_delete_delete= async(req,res)=>{
-  const event = await invitationOrganizer.findByIdAndDelete(req.params.invitationId)
+exports.invitation_delete_delete = async (req, res) => {
+  const event = await invitationOrganizer.findByIdAndDelete(
+    req.params.invitationId
+  )
   res.redirect("/invitations")
 }
 
 exports.invitation_edit_get = async (req, res) => {
-  const invitations = await invitationOrganizer.findById(req.params.invitationId).populate("event_id").populate("guests")
-  const users = await User.find({}).sort('username')
+  const invitations = await invitationOrganizer
+    .findById(req.params.invitationId)
+    .populate("event_id")
+    .populate("guests")
+  const users = await User.find({}).sort("username")
   const currentUser = req.session.user._id
-  const allUsers = users.filter((user) => user._id.toString() !== currentUser.toString())
+  const allUsers = users.filter(
+    (user) => user._id.toString() !== currentUser.toString()
+  )
 
-  res.render("invitations/edit.ejs", {invitations, allUsers})
+  res.render("invitations/edit.ejs", { invitations, allUsers })
 }
 
 exports.invitation_edit_put = async (req, res) => {
-  const invitations = await invitationOrganizer.findById(req.params.invitationId).populate("guests")
+  const invitations = await invitationOrganizer
+    .findById(req.params.invitationId)
+    .populate("guests")
   const invitationId = req.params.invitationId
   const newGuests = req.body.guests
 
@@ -55,11 +81,11 @@ exports.invitation_edit_put = async (req, res) => {
     return guest._id.equals(newGuests) //if user_id in guests is exit so return true
   })
 
-  if(!checkGuest){
-    const updatedGuests = await invitationOrganizer.findByIdAndUpdate(invitationId,
-      {$push: {guests: newGuests}}
+  if (!checkGuest) {
+    const updatedGuests = await invitationOrganizer.findByIdAndUpdate(
+      invitationId,
+      { $push: { guests: newGuests } }
     )
   }
   res.redirect(`/invitations/${invitationId}`)
 }
-

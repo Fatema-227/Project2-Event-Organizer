@@ -7,7 +7,7 @@
   </head>
   <body>
     <%-include("../partials/_navbar.ejs")%>
-    <form action="/invitations" method="post">
+    <form action="/invitations/<%= event._id %>/new" method="post">
       <input type="hidden" name="event_id" value="<%= event._id %>" />
       <h2><%= event.title %></h2>
       <p><%= event.description %></p>
@@ -25,17 +25,32 @@
       <button class="add-guest" type="button">Add This Guest</button>
       <h4>All Guests</h4>
       <div>
-        <ul class="list-guests">
-
-        </ul>
+        <ul class="list-guests"></ul>
       </div>
+      <input
+        type="text"
+        name="eventStatus"
+        id="eventStatus"
+        value="Draft"
+        hidden
+      />
 
-      <button type="submit">Create invitation</button>
+      <input type="hidden" name="submitType" id="submitType" />
+
+      <button
+        type="submit"
+        id="send"
+        onclick="document.getElementById('submitType').value='invitation'"
+      >
+        Create invitation
+      </button>
     </form>
 
     <script>
       const listUserName = document.querySelector("#guests")
       const addButton = document.querySelector(".add-guest")
+      const sendButton = document.querySelector("#send")
+      console.log(sendButton)
       const allGuests = []
       const addNewGuest = () => {
         // reference: https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions
@@ -62,6 +77,12 @@
         }
       }
       addButton.addEventListener("click", addNewGuest)
+      let status = document.querySelector("#eventStatus")
+      console.log(status.value)
+      sendButton.addEventListener("click", () => {
+        status.value = "Sent"
+      })
     </script>
   </body>
 </html>
+<script></script>

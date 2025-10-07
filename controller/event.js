@@ -27,17 +27,36 @@ exports.event_new_get = async (req, res) => {
   res.render("events/new.ejs")
 }
 exports.event_new_post = async (req, res) => {
+  const events = await Event.find({ user_id: req.session.user._id }).populate(
+    "user_id"
+  )
   req.body.user_id = req.session.user._id
-  req.body.isPublic === "on"
-    ? (req.body.isPublic = true)
-    : (req.body.isPublic = false)
-  await Event.create(req.body)
-  res.redirect("/events")
+  const newEventData = {
+  ...req.body,
+  user_id: req.session.user._id,
+  isPublic: req.body.isPublic === "on" ? true : false,
+};
+
+const newEvent = await Event.create(newEventData);
+
+if (req.body.submitType === "draft") {
+  return res.redirect(`/events`);
+}
+
+if (req.body.submitType === "invitation") {
+  return res.redirect(`/invitations/${newEvent._id}/new`);
+}
 }
 exports.event_show_get=async(req,res)=>{
   const events = await Event.findById(req.params.eventID).populate("user_id")
   const currentUser = req.session.user._id
   res.render("events/show.ejs",{events, currentUser})
+}
+exports.events_show_postInvitation=async(req,res)=>{
+  const event = await Event.findById(req.params.eventID)
+  await event.save()
+
+  res.redirect(`/invitations/${event._id}/new`)
 }
 exports.event_delete_delete=async(req,res)=>{
   const event = await Event.findByIdAndDelete(req.params.eventID)
