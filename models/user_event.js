@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const user_eventSchema = new mongoose.Schema({
+const userEventSchema = new mongoose.Schema({
   role:{
     type:String,
     enum: ["Organizer", "VIPGuest", "RegularGuest", "Helper"]
@@ -21,5 +21,5 @@ const user_eventSchema = new mongoose.Schema({
   }
 )
 
-const UserEvent = mongoose.model("UserEvent", user_eventSchema)
+const UserEvent = mongoose.model("UserEvent", userEventSchema)
 module.exports = UserEvent

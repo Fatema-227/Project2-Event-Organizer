@@ -1,20 +1,18 @@
 <%- include("../partials/_navbar")%>
 <h1><%=events.title%></h1>
 <%if(events.description!==""){%>
-
 <p>Description: <%=events.description%></p>
 <%}%>
-<!-- Extracting the time and date is from chatGPT -->
-<p>Date: <%= events.dateTime.toLocaleDateString('en-GB') %></p>
-<p>
-  Time: <%= events.dateTime.toLocaleTimeString('en-GB', { hour: '2-digit',
-  minute:'2-digit' }) %>
-</p>
+<p>Time: <%= events.time %></p>
+<p>Date: <%= events.date %></p>
 <p>Address: <%=events.address%></p>
 <p>Is public? <%= events.isPublic ? 'yes' : 'no' %></p>
 <%if(events.isPublic===true){%>
 <p>Guests limit: <%=events.limit%></p>
 <%}%>
+<button><a href="/events/<%=events._id%>/edit">Edit</a></button>
 <form action="/events/<%=events._id%>?_method=DELETE" method="post">
   <button type="submit">Delete App</button>
 </form>
+
+  <button type="submit" id="send"><a href="/invitations/<%= events._id %>/new">Create invitation</a></button>
