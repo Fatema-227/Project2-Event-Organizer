@@ -9,6 +9,7 @@ const passUserToView = require('./middleware/pass-user-to-view')
 const isSignIn = require("./middleware/is-signed-in")
 const app = express()
 
+
 // Database configurations
 const mongoose = require("./config/db")
 
@@ -17,12 +18,6 @@ const port = process.env.PORT ? process.env.PORT : "3000"
 
 // Use MiddleWare
 app.use(express.urlencoded())
-<<<<<<< HEAD
-app.use(express.json())
-app.use(express.static("public"))
-app.use("/uploads",express.static("uploads"))
-=======
->>>>>>> bc4ae9a41b9115a436d0c519a9bc9842c18c1df3
 app.use(methodOverride("_method"))
 app.use(morgan("dev"))
 app.use(
@@ -33,6 +28,7 @@ app.use(
   })
 )
 app.use(passUserToView)
+app.use(express.static('public'))
 
 
 // rout route

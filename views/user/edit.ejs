@@ -1,6 +1,6 @@
 <%- include("../partials/_navbar") %>
 <h1>Update User Information</h1>
-<form action="/user/<%= user._id %>/edit?_method=PUT" method="post" enctype="multipart/form-data">
+<form action="/user/<%= user._id %>/edit?_method=PUT" method="post">
   <label for="username"> username </label>
   <input
     type="text"
@@ -26,7 +26,7 @@
   <br /><br />
 
   <label> Password </label>
-  <input type="password" name="password" id="password" required />
+  <input type="password" name="newPassword" id="newPassword" required />
   <br /><br />
 
   <label> Confirm Password </label>
@@ -34,7 +34,7 @@
   <br /><br />
 
   <label for="picture"> Profile Picture </label>
-  <input type="file" name="picture" id="picture" value="<%= user.picture %>" />
+  <input type="text" name="picture" id="picture" value="<%= user.picture %>" />
   <br /><br />
 
   <button type="submit">Update</button><br /><br />

@@ -3,7 +3,7 @@
 <h3>User Information:</h3>
 
 <% if(user.picture) { %>
-<p><img src="/<%= user.picture %>" alt="profile-picture" width="150px"></p>
+<img src="../uploads/<%= user.picture %>" alt="profile-picture" width="150px" />
 <% } %>
 <p><b>username:</b> <%= user.username %></p>
 <p><b>Email:</b> <%= user.email %></p>
