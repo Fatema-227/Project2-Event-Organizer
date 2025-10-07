@@ -14,3 +14,7 @@
 <form action="/events/<%=events._id%>?_method=DELETE" method="post">
   <button type="submit">Delete App</button>
 </form><br>
+
+<% if(events.user_id._id.equals(currentUser)){ %>
+  <button type="submit" id="send"><a href="/invitations/<%= events._id %>/new">Create invitation</a></button>
+<% } %>

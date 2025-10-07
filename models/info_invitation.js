@@ -8,7 +8,7 @@ const invitationOrganizerSchema = new mongoose.Schema({
   }],
   sendInvitation: {
     type: String,
-    default:"default"
+    default: "default"
   },
   event_id: {
     type: mongoose.Schema.Types.ObjectId,

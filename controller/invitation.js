@@ -60,7 +60,8 @@ exports.invitation_delete_delete= async(req,res)=>{
 
 exports.invitation_guest_delete= async(req,res)=>{
   const deleteGuests = req.params.guestId
-  const invitations = await invitationOrganizer.findByIdAndDelete(
+  const invitationId = req.params.invitationId
+  const invitations = await invitationOrganizer.findByIdAndUpdate(invitationId,
       {$pull: {guests: deleteGuests}})
   res.redirect('/invitations')
 }

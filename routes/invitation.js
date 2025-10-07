@@ -11,7 +11,7 @@ router.get('/edit/:invitationId', invitationCtrl.invitation_edit_get)
 router.put('/edit/:invitationId', invitationCtrl.invitation_edit_put)
 router.delete("/:invitationId", invitationCtrl.invitation_delete_delete)
 
-router.delete("/:guestId", invitationCtrl.invitation_guest_delete)
+router.delete("/:invitationId/:guestId", invitationCtrl.invitation_guest_delete)
 
 
 module.exports = router
