@@ -32,6 +32,11 @@ exports.invitation_show_get = async (req, res) => {
   res.render("invitations/show.ejs", {invitations})
 }
 
+exports.invitation_delete_delete= async(req,res)=>{
+  const event = await invitationOrganizer.findByIdAndDelete(req.params.invitationId)
+  res.redirect("/invitations")
+}
+
 exports.invitation_edit_get = async (req, res) => {
   const invitations = await invitationOrganizer.findById(req.params.invitationId).populate("event_id").populate("guests")
   const users = await User.find({}).sort('username')
@@ -55,10 +60,6 @@ exports.invitation_edit_put = async (req, res) => {
       {$push: {guests: newGuests}}
     )
   }
-  res.redirect("/")
+  res.redirect(`/invitations/${invitationId}`)
 }
 
-exports.invitation_send_post = async (req, res) => {
-  const invitations = await invitationOrganizer.findById(req.params.eventId).populate("event_id").populate("guests")
-  res.render("invitations/send.ejs", {invitations})
-}

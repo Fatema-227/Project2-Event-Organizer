@@ -21,6 +21,10 @@
 
     <button type="submit"><a href="/invitations/edit/<%= invitations._id %>">Edit Invitation</a></button>
     <% if(invitations.sendInvitation === "default"){ %>
-    <button type="submit">Send Invitation</button>
+    <button type="submit">Send Invitation</button><br><br>
     <% } %>
+
+      <form action="/invitations/<%= invitations._id %>?_method=DELETE" method="post">
+      <button type="submit">Delete Invitation</button>
+      </form>
   </form>
