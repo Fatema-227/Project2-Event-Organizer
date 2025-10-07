@@ -57,3 +57,8 @@ exports.invitation_edit_put = async (req, res) => {
   }
   res.redirect("/")
 }
+
+exports.invitation_send_post = async (req, res) => {
+  const invitations = await invitationOrganizer.findById(req.params.eventId).populate("event_id").populate("guests")
+  res.render("invitations/send.ejs", {invitations})
+}

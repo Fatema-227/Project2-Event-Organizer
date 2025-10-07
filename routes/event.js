@@ -4,5 +4,7 @@ router.get("/",eventCtrl.event_index_get)
 router.get("/new",eventCtrl.event_new_get)
 router.post("/",eventCtrl.event_new_post)
 router.get("/:eventID",eventCtrl.event_show_get)
+router.get("/:eventID/edit",eventCtrl.event_edit_get)
+router.put("/:eventID",eventCtrl.event_edit_put)
 router.delete("/:eventID",eventCtrl.event_delete_delete)
 module.exports=router
