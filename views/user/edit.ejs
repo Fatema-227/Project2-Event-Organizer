@@ -1,6 +1,6 @@
 <%- include("../partials/_navbar") %>
 <h1>Update User Information</h1>
-<form action="/user/<%= user._id %>/edit?_method=PUT" method="post">
+<form action="/user/<%= user._id %>/edit?_method=PUT" method="post" enctype="multipart/form-data">
   <label for="username"> username </label>
   <input
     type="text"
@@ -34,7 +34,7 @@
   <br /><br />
 
   <label for="picture"> Profile Picture </label>
-  <input type="text" name="picture" id="picture" value="<%= user.picture %>" />
+  <input type="file" name="picture" id="picture" value="<%= user.picture %>" />
   <br /><br />
 
   <button type="submit">Update</button><br /><br />

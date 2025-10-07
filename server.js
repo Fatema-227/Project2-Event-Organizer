@@ -1,5 +1,7 @@
 require("dotenv").config()
 const express = require("express")
+const multer=require("multer")
+const path=require("path")
 const methodOverride = require("method-override")
 const morgan = require("morgan")
 const session = require("express-session")
@@ -18,6 +20,7 @@ const port = process.env.PORT ? process.env.PORT : "3000"
 app.use(express.urlencoded())
 app.use(express.json())
 app.use(express.static("public"))
+app.use("/uploads",express.static("uploads"))
 app.use(methodOverride("_method"))
 app.use(morgan("dev"))
 app.use(
@@ -28,6 +31,7 @@ app.use(
   })
 )
 app.use(passUserToView)
+
 
 // rout route
 app.get("/", async (req, res) => {

@@ -41,3 +41,41 @@ exports.update_password = async (req, res) => {
 
   res.send("password updated")
 }
+
+exports.user_profile_get = async (req, res) => {
+  res.render("auth/profile.ejs")
+}
+
+exports.user_profile_post = async (req, res) => {
+  if (req.file) {
+    req.body.picture = `/uploads/${req.file.filename}`
+  }
+
+  await User.findByIdAndUpdate(req.params.userId, req.body)
+
+  req.session.user.profileImg = req.body.picture;
+  res.redirect(`/user/${req.params.userId}/profile`)
+}
+
+
+// exports.create_post = async (req, res) => {
+//   req.body.owner = req.session.user._id;
+//   req.body.images = []
+//   if (req.files["images"]) {
+//     req.files["images"].forEach((file) => {
+//       req.body.images.push(file.path)
+//     })
+//   }
+//   await user.create(req.body)
+//   res.redirect("/user/"+ req.session.user._id)
+// }
+
+// exports.user_update_put=async(req,res)=>{
+//   const user=await User.findById(req.params.userId)
+
+//   if (req.files){
+//       user.picture=req.file.path
+//   }
+//   await user.save()
+//   res.redirect("/users/" + user._id)
+// }
