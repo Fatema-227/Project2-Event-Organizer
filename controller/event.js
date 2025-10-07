@@ -36,7 +36,8 @@ exports.event_new_post = async (req, res) => {
 }
 exports.event_show_get=async(req,res)=>{
   const events = await Event.findById(req.params.eventID).populate("user_id")
-  res.render("events/show.ejs",{events})
+  const currentUser = req.session.user._id
+  res.render("events/show.ejs",{events, currentUser})
 }
 exports.event_delete_delete=async(req,res)=>{
   const event = await Event.findByIdAndDelete(req.params.eventID)

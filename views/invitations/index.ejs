@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Invitation</title>
+  <title>All Invitation</title>
 </head>
 <body>
-  <p>Title of Event</p>
-  <p>Description</p>
-  <p>Date and Time</p>
-  <p>Location</p>
-
-  <p>Select the guest</p>
-  <% eventDetails.forEach (detail => { %>
-    <p><%= detail.user_id.user_name%></p>
-  <% }) %>
+  <%-include("../partials/_navbar.ejs")%>
+  <% invitations.forEach((invitation)=>{%>
+<ul>
+  <li><a href="/invitations/<%= invitation._id%>"><%= invitation.event_id.title %> Invitation</a></li>
+</ul>
+<%})%>
 </body>
 </html>

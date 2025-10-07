@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show Invitation</title>
+</head>
+<body>
+  <form action="/invitations" method="post">
+    <h2><%= invitations.event_id.title  %></h2>
+    <p><%= invitations.event_id.description  %></p>
+    <p><%= invitations.event_id.date  %></p>
+    <p><%= invitations.event_id.time  %></p>
+    <p><%= invitations.event_id.address  %></p>
+    <h4>All Guests</h4>
+    <% invitations.guests.forEach((user)=>{%>
+    <ul>
+      <li><%= user.username.toUpperCase() %>&nbsp;- Role</li>
+    </ul>
+    <%})%>
+
+    <button type="submit"><a href="/invitations/edit/<%= invitations._id %>">Edit Invitation</a></button>
+    <% if(invitations.sendInvitation === "default"){ %>
+    <button type="submit">Send Invitation</button><br><br>
+    <% } %>
+
+      <form action="/invitations/<%= invitations._id %>?_method=DELETE" method="post">
+      <button type="submit">Delete Invitation</button>
+      </form>
+  </form>
