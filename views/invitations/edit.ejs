@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Invitation</title>
+</head>
+<body>
+  <form action="/invitations/edit/<%= invitations._id %>?_method=PUT" method="post">
+    <h2><%= invitations.event_id.title  %></h2>
+    <p><%= invitations.event_id.description  %></p>
+    <p><%= invitations.event_id.date  %></p>
+    <p><%= invitations.event_id.time  %></p>
+    <p><%= invitations.event_id.address  %></p>
+    <label><b>Add other guest</b>&nbsp;*can select guests one time</label><br>
+    <select name="guests"  id="guests" multiple>
+      <% allUsers.forEach (user => { %>
+      <% const specificUser = invitations.guests.some(guest => guest._id.equals(user._id)) %>
+      <% if (!specificUser) { %>
+      <option value="<%= user._id %>"><%= user.username%></option>
+      <% } %>
+    <% })%>
+    </select>
+    <button class="add-guest" type="button">Add This Guest</button>
+
+    <br><br><button type="submit">Edit invitation</button>
+  </form>
+  
+    <h4>All Guests</h4>
+    <ul class="list-guests"></ul>
+    <% invitations.guests.forEach((user)=>{%>
+    <ul>
+      <li>
+        <%= user.username.toUpperCase() %>&nbsp;<a href="/userEvent/ids">Role</a><br>
+        <form action="#" method="post">
+          <button type="submit">Delete Guest</button>
+        </form><br><br>
+      </li>
+
+    </ul>
+    <%})%>
+
+    <script>
+      const listUserName = document.querySelector('#guests')
+      const addButton = document.querySelector('.add-guest')
+      const allGuests = []
+      const addNewGuest = () =>{
+        // reference: https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions
+        const selectedOptions = listUserName.selectedOptions
+        for (let i = 0; i < selectedOptions.length; i++) {
+          const selectedName = selectedOptions[i].text
+
+          if (selectedName && !allGuests.includes(selectedName.toUpperCase())) {
+            allGuests.push(selectedName.toUpperCase())
+          }
+
+          if(allGuests.length > 0){
+            const result = document.createElement('li')
+            result.innerHTML = selectedName.toUpperCase()
+            document.querySelector('.list-guests').appendChild(result)
+
+            if(result){
+              addButton.style.cursor = "not-allowed"
+            }
+          }
+        }
+        console.log(allGuests)
+      }
+      addButton.addEventListener('click', () => {
+        if(addButton.style.cursor !== "not-allowed"){
+          addNewGuest()
+        }
+      })
+    </script>
+</body>
+</html>
