@@ -9,12 +9,8 @@
   <form action="/invitations/edit/<%= invitations._id %>?_method=PUT" method="post">
     <h2><%= invitations.event_id.title  %></h2>
     <p><%= invitations.event_id.description  %></p>
-    <% const eventDateTime = invitations.event_id.dateTime.toString()
-      const eventDate = eventDateTime.substring(0, 15) // split the string so return string
-      const eventTime = eventDateTime.substring(16, 25)
-    %>
-    <p><%= eventDate  %></p>
-    <p><%= eventTime  %></p>
+    <p><%= invitations.event_id.date  %></p>
+    <p><%= invitations.event_id.time  %></p>
     <p><%= invitations.event_id.address  %></p>
     <h4>All Guests</h4>
     <ul class="list-guests"></ul>

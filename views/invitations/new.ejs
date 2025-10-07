@@ -11,11 +11,8 @@
       <input type="hidden" name="event_id" value="<%= event._id %>" />
       <h2><%= event.title %></h2>
       <p><%= event.description %></p>
-      <% const eventDateTime = event.dateTime.toString() %>
-      <% const eventDate = eventDateTime.substring(0, 15) // split the string so return string const %>
-      <% const eventTime = eventDateTime.substring(16, 25) %>
-      <p><%= eventDate %></p>
-      <p><%= eventTime %></p>
+      <p><%= event.date %></p>
+      <p><%= event.time %></p>
       <p><%= event.address %></p>
       <label><b>Select the guest</b>&nbsp;*can select guests one time</label
       ><br />
