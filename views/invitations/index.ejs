@@ -1,27 +1,50 @@
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>All Invitation</title>
 </head>
 <body>
   <%-include("../partials/_navbar.ejs")%>
-  <% invitations.forEach((invitation)=>{%>
-  <% if(invitation.user_id.equals(userId) && invitation.sendInvitation === "Draft"){ %>
-<ul>
-  <li><a href="/invitations/<%= invitation._id%>"><%= invitation.event_id.title %> Invitation || Draft</a></li>
-</ul>
-  <% }else if(invitation.user_id.equals(userId) && invitation.sendInvitation === "Sent"){ %>
-<ul>
-  <li><a href="/invitations/<%= invitation._id%>"><%= invitation.event_id.title %> Invitation || Sent</a></li>
-</ul>
-  <% } else if(invitation.sendInvitation === "Sent" && invitation.guests.some(guest => guest._id.equals(userId))) {%>
-<ul>
-  <li><a href="/invitations/showguest/<%= invitation._id%>"><%= invitation.event_id.title %> Invitation</a></li>
-</ul>
-  <% } else if(invitation.event_id.eventStatus === "Completed" && invitation.guests.some(guest => guest._id.equals(userId))) {%>
-<ul>
-  <li><button class="completed-event" style="cursor: not-allowed;"><%= invitation.event_id.title %> Invitation</button></li>
-</ul>
-<% } %>
-<%  })  %>
+  <div class="invitation-page">
+    <div class="invitation-header">
+      <h1>All Invitations</h1>
+    </div>
 
+    <% invitations.forEach((invitation)=>{ %>
+
+      <% if(invitation.user_id.equals(userId) && invitation.sendInvitation === "Draft"){ %>
+        <ul class="invitation-list">
+          <li class="invitation-item">
+            <a href="/invitations/<%= invitation._id %>" class="invitation-link invitation-draft">
+              🖋 Draft | <%= invitation.event_id.title %> Invitation
+            </a>
+          </li>
+        </ul>
+
+      <% } else if(invitation.user_id.equals(userId) && invitation.sendInvitation === "Sent"){ %>
+        <ul class="invitation-list">
+          <li class="invitation-item">
+            <a href="/invitations/<%= invitation._id %>" class="invitation-link invitation-sent">
+              ✉ Sent | <%= invitation.event_id.title %> Invitation
+            </a>
+          </li>
+        </ul>
+        <% } else if(invitation.event_id.eventStatus === "Completed" && invitation.guests.some(guest => guest._id.equals(userId))) { %>
+        <ul class="invitation-list">
+          <li class="invitation-item">
+            <a href="/invitations/showguest/<%= invitation._id %>" class="invitation-completed disabled-link">✔ Completed | <%= invitation.event_id.title %>  Invitation </a>
+          </li>
+        </ul>
+      <% } else if(invitation.sendInvitation === "Sent" && invitation.guests.some(guest => guest._id.equals(userId))) { %>
+        <ul class="invitation-list">
+          <li class="invitation-item">
+            <a href="/invitations/showguest/<%= invitation._id %>" class="invitation-link invitation-guest">
+              ✦ new | <%= invitation.event_id.title %> Invitation
+            </a>
+          </li>
+        </ul>
+      <% } %>
+    <% }) %>
+  </div>
 </body>
 </html>

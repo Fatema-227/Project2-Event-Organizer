@@ -4,42 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Invitation</title>
+    <link rel="stylesheet" href="/stylesheets/style-new.css" />
   </head>
   <body>
     <%-include("../partials/_navbar.ejs")%>
-    <form action="/invitations/<%= event._id %>/new" method="post">
+    <form action="/invitations/<%= event._id %>/new" method="post" class="inv-form">
       <input type="hidden" name="event_id" value="<%= event._id %>" />
-      <h2><%= event.title %></h2>
-      <p><%= event.description %></p>
-      <p><%= event.date %></p>
-      <p><%= event.time %></p>
-      <p><%= event.address %></p>
-      <label><b>Select the guest</b>&nbsp;*can select guests one time</label
-      ><br />
-      <select name="guests" id="guests" multiple>
+      <h2 class="inv-title"><%= event.title %></h2>
+      <p class="inv-description"><%= event.description %></p>
+      <p class="inv-date"><%= event.date %></p>
+      <p class="inv-time"><%= event.time %></p>
+      <p class="inv-address"><%= event.address %></p>
+      <label class="inv-label"><b>Select the guest</b>&nbsp;*Select all guests one time</label><br />
+      <select name="guests" id="guests" multiple class="inv-select-guests">
         <option value="">---Select Your Guest---</option>
-        <% allUsers.forEach (user => { %>
-        <option value="<%= user._id %>"><%= user.username%></option>
+        <% allUsers.forEach(user => { %>
+          <option value="<%= user._id %>"><%= user.username %></option>
         <% }) %>
       </select>
-      <button class="add-guest" type="button">Add This Guest</button>
-      <h4>All Guests</h4>
-      <div>
-        <ul class="list-guests"></ul>
+      <button class="inv-add-guest" type="button">Add This Guest</button>
+      <h4 class="inv-subtitle">All Guests</h4>
+      <div class="inv-guest-list-container">
+        <ul class="inv-list-guests"></ul>
       </div>
-      <input
-        type="text"
-        name="eventStatus"
-        id="eventStatus"
-        value="Draft"
-        hidden
-      />
-
+      <input type="text" name="eventStatus" id="eventStatus" value="Draft" hidden />
       <input type="hidden" name="submitType" id="submitType" />
-
       <button
         type="submit"
-        id="send"
+        id="inv-send"
+        class="inv-submit-button"
         onclick="document.getElementById('submitType').value='invitation'"
       >
         Create invitation
@@ -47,42 +40,38 @@
     </form>
 
     <script>
-      const listUserName = document.querySelector("#guests")
-      const addButton = document.querySelector(".add-guest")
-      const sendButton = document.querySelector("#send")
-      console.log(sendButton)
-      const allGuests = []
+      const listUserName = document.querySelector("#guests");
+      const addButton = document.querySelector(".inv-add-guest");
+      const sendButton = document.querySelector("#inv-send");
+      const allGuests = [];
       const addNewGuest = () => {
-        // reference: https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions
-        const selectedOptions = listUserName.selectedOptions
+        const selectedOptions = listUserName.selectedOptions;
         for (let i = 0; i < selectedOptions.length; i++) {
-          const selectedName = selectedOptions[i].text
+          const selectedName = selectedOptions[i].text;
           if (
             selectedName &&
             selectedName !== "---Select Your Guest---" &&
             addButton.style.cursor !== "not-allowed"
           ) {
-            allGuests.push(selectedName.toUpperCase())
+            allGuests.push(selectedName.toUpperCase());
           }
         }
         if (allGuests.length > 0) {
-          const result = document.createElement("li")
-          result.classList.add("my-guest")
-          result.innerText = allGuests
-          document.querySelector(".list-guests").appendChild(result)
+          const result = document.createElement("li");
+          result.classList.add("inv-my-guest");
+          result.innerText = allGuests;
+          document.querySelector(".inv-list-guests").appendChild(result);
           if (result) {
-            allGuests.length = 0
-            addButton.style.cursor = "not-allowed"
+            allGuests.length = 0;
+            addButton.style.cursor = "not-allowed";
           }
         }
-      }
-      addButton.addEventListener("click", addNewGuest)
-      let status = document.querySelector("#eventStatus")
-      console.log(status.value)
+      };
+      addButton.addEventListener("click", addNewGuest);
+      let status = document.querySelector("#eventStatus");
       sendButton.addEventListener("click", () => {
-        status.value = "Sent"
-      })
+        status.value = "Sent";
+      });
     </script>
   </body>
 </html>
-<script></script>

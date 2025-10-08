@@ -1,75 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Invitation</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <title>Edit Invitation</title>
 </head>
 <body>
-  <form action="/invitations/edit/<%= invitations._id %>?_method=PUT" method="post">
-    <h2><%= invitations.event_id.title  %></h2>
-    <p><%= invitations.event_id.description  %></p>
-    <p><%= invitations.event_id.date  %></p>
-    <p><%= invitations.event_id.time  %></p>
-    <p><%= invitations.event_id.address  %></p>
-    <label><b>Add other guest</b>&nbsp;*can select guests one time</label><br>
-    <select name="guests"  id="guests" multiple>
-      <% allUsers.forEach (user => { %>
-      <% const specificUser = invitations.guests.some(guest => guest._id.equals(user._id)) %>
-      <% if (!specificUser) { %>
-      <option value="<%= user._id %>"><%= user.username%></option>
-      <% } %>
-    <% })%>
-    </select>
-    <button class="add-guest" type="button">Add This Guest</button>
+  <%-include("../partials/_navbar.ejs")%>
 
-    <br><br><button type="submit">Edit invitation</button>
-  </form>
+  <div class="container-invitation-event">
+    <form action="/invitations/edit/<%= invitations._id %>?_method=PUT" method="post" class="form-invitation-event">
+      <h2 class="title-invitation-event"><%= invitations.event_id.title %></h2>
+      <p class="description-invitation-event"><%= invitations.event_id.description %></p>
+      <p class="date-invitation-event"><%= invitations.event_id.date %></p>
+      <p class="time-invitation-event"><%= invitations.event_id.time %></p>
+      <p class="address-invitation-event"><%= invitations.event_id.address %></p>
+      <label class="label-invitation-event"><b>Add other guest</b>&nbsp;*Select all guests one time</label><br />
+      <select name="guests" id="guests" multiple class="select-guests">
+        <% allUsers.forEach(user => { %>
+          <% const specificUser = invitations.guests.some(guest => guest._id.equals(user._id)) %>
+          <% if (!specificUser) { %>
+            <option value="<%= user._id %>"><%= user.username %></option>
+          <% } %>
+        <% }) %>
+      </select>
+      <button class="add-guest" type="button">Add This Guest</button>
 
-    <h4>All Guests</h4>
+      <br /><br /><button type="submit" class="submit-button">Edit invitation</button>
+    </form>
+
+    <h4 class="section-subtitle">All Guests</h4>
     <ul class="list-guests"></ul>
-    <% invitations.guests.forEach((user)=>{%>
-    <ul>
-      <li>
-        <%= user.username.toUpperCase() %><br>
-        <form action="/invitations/<%= invitations._id %>/<%= user._id %>?_method=DELETE" method="post">
-          <button type="submit">Delete Guest</button>
-        </form><br><br>
-      </li>
-    </ul>
-    <%})%>
 
-    <script>
-      const listUserName = document.querySelector('#guests')
-      const addButton = document.querySelector('.add-guest')
-      const allGuests = []
-      const addNewGuest = () =>{
-        // reference: https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions
-        const selectedOptions = listUserName.selectedOptions
-        for (let i = 0; i < selectedOptions.length; i++) {
-          const selectedName = selectedOptions[i].text
+    <% invitations.guests.forEach((user) => { %>
+      <ul class="my-events my-event event-card">
+        <li class="guest-item">
+          <%= user.username.toUpperCase() %><br />
+          <form action="/invitations/<%= invitations._id %>/<%= user._id %>?_method=DELETE" method="post" class="delete-guest-form">
+            <button type="submit" class="delete-guest-button">Delete Guest</button>
+          </form>
+          <br /><br />
+        </li>
+      </ul>
+    <% }) %>
+  </div>
 
-          if (selectedName && !allGuests.includes(selectedName.toUpperCase())) {
-            allGuests.push(selectedName.toUpperCase())
-          }
+  <script>
+    const listUserName = document.querySelector('#guests')
+    const addButton = document.querySelector('.add-guest')
+    const allGuests = []
+    const addNewGuest = () =>{
+      const selectedOptions = listUserName.selectedOptions
+      for (let i = 0; i < selectedOptions.length; i++) {
+        const selectedName = selectedOptions[i].text
 
-          if(allGuests.length > 0){
-            const result = document.createElement('li')
-            result.innerHTML = selectedName.toUpperCase()
-            document.querySelector('.list-guests').appendChild(result)
+        if (selectedName && !allGuests.includes(selectedName.toUpperCase())) {
+          allGuests.push(selectedName.toUpperCase())
+        }
 
-            if(result){
-              addButton.style.cursor = "not-allowed"
-            }
+        if(allGuests.length > 0){
+          const result = document.createElement('li')
+          result.innerHTML = selectedName.toUpperCase()
+          document.querySelector('.list-guests').appendChild(result)
+
+          if(result){
+            addButton.style.cursor = "not-allowed"
           }
         }
-        console.log(allGuests)
       }
-      addButton.addEventListener('click', () => {
-        if(addButton.style.cursor !== "not-allowed"){
-          addNewGuest()
-        }
-      })
-    </script>
+      console.log(allGuests)
+    }
+    addButton.addEventListener('click', () => {
+      if(addButton.style.cursor !== "not-allowed"){
+        addNewGuest()
+      }
+    })
+  </script>
 </body>
 </html>

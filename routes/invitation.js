@@ -9,8 +9,6 @@ router.post('/:eventId/new', invitationCtrl.invitation_new_post)
 router.get("/:invitationId", invitationCtrl.invitation_show_get)
 router.get('/edit/:invitationId', invitationCtrl.invitation_edit_get)
 router.put('/edit/:invitationId', invitationCtrl.invitation_edit_put)
-router.delete("/:invitationId", invitationCtrl.invitation_delete_delete)
-router.delete("/:invitationId", invitationCtrl.invitation_delete_delete)
 
 router.get("/showguest/:invitationId", invitationCtrl.invitation_show_guest_get)
 router.post("/showguest/:invitationId", invitationCtrl.invitation_show_guest_post)

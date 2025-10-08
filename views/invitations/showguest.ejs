@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
   <title>Show Invitation</title>
 </head>
-<body>
+<body class="guest-invitation-body">
 
-  <form action="/invitations/showguest/<%= invitations._id%>" method="post">
-    <h2><%= invitations.event_id.title  %></h2>
-    <p><%= invitations.event_id.description  %></p>
-    <p><%= invitations.event_id.date  %></p>
-    <p><%= invitations.event_id.time  %></p>
-    <p><%= invitations.event_id.address  %></p>
+  <div class="invitation-flip-container">
+    <div class="invitation-card">
+      <div class="invitation-card-front"></div>
 
-    <% if(!invitationResponse) { %>
-    <label for="invitationStatus">Are you going to attend the event?</label>
-    <select name="invitationStatus" id="invitationStatus">
-      <option value="Accepted">Accepted</option>
-      <option value="Declined">Declined</option>
-    </select>
-    <br><br>
+      <div class="invitation-card-back">
+        <form action="/invitations/showguest/<%= invitations._id %>" method="post" class="invitation-response-form">
+          <h1 class="invitation-title"><%= invitations.event_id.title %></h1>
+          <div class="card-back-info">
+            <p class="invitation-description"><%= invitations.event_id.description %></p>
+            <p class="invitation-date"><%= invitations.event_id.date %></p>
+            <p class="invitation-time"><%= invitations.event_id.time %></p>
+            <p class="invitation-address"><%= invitations.event_id.address %></p>
+          </div>
 
-    <label for="comment">Comment</label><br>
-    <textarea name="comment" id="comment" row="3" cols="25"></textarea>
-    <br><br>
 
-    <button type="submit">Send response</button><p>*Please take care, can't change your response.</p>
-    <% } %>
-  </form>
+          <% if (!invitationResponse) { %>
+            <label for="invitationStatus" class="invitation-label">Will you attend?</label>
+            <select name="invitationStatus" id="invitationStatus" class="invitation-select" required>
+              <option value="Accepted">Accepted</option>
+              <option value="Declined">Declined</option>
+            </select>
+
+            <label for="comment" class="invitation-label">Comment</label>
+            <textarea name="comment" id="comment" rows="3" cols="25" class="invitation-textarea" required></textarea>
+
+            <button type="submit" class="invitation-submit-button">Send Response</button>
+            <p class="invitation-note">*Please note: You can't change your response.</p>
+          <% } %>
+        </form>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
