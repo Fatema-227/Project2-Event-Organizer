@@ -3,22 +3,11 @@
 <h1>Update User Information</h1>
 <form action="/user/<%= user._id %>/edit?_method=PUT" method="post">
   <label for="username"> username </label>
-  <input
-    type="text"
-    name="username"
-    id="firstname"
-    value="<%= user.username %>"
-  />
+  <input type="text" name="username" id="firstname" value="<%= user.username %>">
   <br /><br />
 
   <label for="email"> Email </label>
-  <input
-    type="email"
-    name="email"
-    id="email"
-    value="<%= user.email %>"
-    required
-  />
+  <input type="email" name="email" id="email" value="<%= user.email %>"required>
   <br /><br />
 
   <label> Old Password </label>
