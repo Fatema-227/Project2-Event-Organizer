@@ -31,7 +31,8 @@ exports.invitation_new_post = async (req, res) => {
 exports.invitation_show_get = async (req, res) => {
   const invitations = await invitationOrganizer.findById(req.params.invitationId).populate("event_id").populate("guests")
   const currentUser = req.session.user._id
-  const invitationResponse = await invitation.findById(req.params.invitationId).populate('guest_id')
+  const invitationResponse = await invitation.find({invitationCreated_id: req.params.invitationId}).populate("guest_id")
+  const guests = invitationResponse
   res.render("invitations/show.ejs", {invitations, currentUser, invitationResponse})
 }
 
@@ -39,6 +40,7 @@ exports.invitation_show_guest_get = async (req, res) => {
   const invitations = await invitationOrganizer.findById(req.params.invitationId).populate("event_id").populate("guests")
   const currentUser = req.session.user._id
   const invitationResponse = await invitation.findOne({
+    guest_id:  currentUser,
     invitationCreated_id: req.params.invitationId
   })
   res.render("invitations/showguest.ejs", {invitations, currentUser, invitationResponse})

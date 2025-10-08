@@ -1,42 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Show Invitation</title>
-</head>
-<body>
-  <% if(invitations.event_id.user_id.equals(currentUser)){ %>
-  <%-include("../partials/_navbar.ejs")%>
-  <% } %>
-  <form action="/invitations" method="post">
-    <h2><%= invitations.event_id.title  %></h2>
-    <p><%= invitations.event_id.description  %></p>
-    <p><%= invitations.event_id.date  %></p>
-    <p><%= invitations.event_id.time  %></p>
-    <p><%= invitations.event_id.address  %></p>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show Invitation</title>
+  </head>
+  <body>
     <% if(invitations.event_id.user_id.equals(currentUser)){ %>
-    <h4>All Guests</h4>
-    <% invitations.guests.forEach((user)=>{%>
-    <ul>
-      <li>
-        <%= user.username.toUpperCase() %>
-      </li>
-    </ul>
-    <%})%>
-    <%  %>
-    <button type="submit"><a href="/invitations/edit/<%= invitations._id %>">Edit Invitation</a></button>
-  </form>
+    <%-include("../partials/_navbar.ejs")%> <% } %>
+    <form action="/invitations" method="post">
+      <h2><%= invitations.event_id.title %></h2>
+      <p><%= invitations.event_id.description %></p>
+      <p><%= invitations.event_id.date %></p>
+      <p><%= invitations.event_id.time %></p>
+      <p><%= invitations.event_id.address %></p>
 
-  <% if(invitations.sendInvitation === "default"){ %>
-    <form action="/invitations/<%= invitations._id %>" method="post">
-      <br><button type="submit">Send Invitation</button>
+      <% if(invitations.event_id.user_id.equals(currentUser)){ %>
+      <h4>All Guests</h4>
+      <% invitations.guests.forEach((user)=>{%>
+      <ul>
+        <li>
+          <%= user.username.toUpperCase() %>
+        </li>
+      </ul>
+          <% invitationResponse.forEach((response) => { %>
+          <% if(user._id.equals(response.guest_id._id)){ %>
+          <ul>
+            <ul>
+              <p>Response:</p>
+              <li>Invitation Status: <%= response.invitationStatus %></li>
+              <li>Comment: <%= response.comment %> </li>
+            </ul>
+          </ul>
+
+          <% } %>
+      <% }) %>
+      <%})%>
+      <button type="submit">
+        <a href="/invitations/edit/<%= invitations._id %>">Edit Invitation</a>
+      </button>
     </form>
-  <% } %>
 
-  <form action="/invitations/<%= invitations._id %>?_method=DELETE" method="post">
-    <br><button type="submit">Delete Invitation</button>
-  </form>
-  <% } %>
+    <% if(invitations.sendInvitation === "default"){ %>
+    <form action="/invitations/<%= invitations._id %>" method="post">
+      <br /><button type="submit">Send Invitation</button>
+    </form>
+    <% } %>
 
+    <form
+      action="/invitations/<%= invitations._id %>?_method=DELETE"
+      method="post"
+    >
+      <br /><button type="submit">Delete Invitation</button>
+    </form>
+    <% } %>
+  </body>
+</html>
