@@ -6,12 +6,16 @@ const invitationSchema = new mongoose.Schema({
   },
   invitationStatus: {
     type: String,
-    enum: ["Pending", "Accepted", "Declined", "Cancelled/ Completed"]
+    enum: ["Accepted", "Declined"],
+    default: "Pending"
   },
     invitationCreated_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'InvitationOrganizer',
-    required: true
+  },
+  guest_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   }
 },
   {

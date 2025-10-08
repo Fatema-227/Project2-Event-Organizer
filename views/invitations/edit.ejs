@@ -25,18 +25,17 @@
 
     <br><br><button type="submit">Edit invitation</button>
   </form>
-  
+
     <h4>All Guests</h4>
     <ul class="list-guests"></ul>
     <% invitations.guests.forEach((user)=>{%>
     <ul>
       <li>
-        <%= user.username.toUpperCase() %>&nbsp;<a href="/userEvent/ids">Role</a><br>
-        <form action="#" method="post">
+        <%= user.username.toUpperCase() %><br>
+        <form action="/invitations/<%= invitations._id %>/<%= user._id %>?_method=DELETE" method="post">
           <button type="submit">Delete Guest</button>
         </form><br><br>
       </li>
-
     </ul>
     <%})%>
 
