@@ -7,11 +7,8 @@ const invitation = require("../models/invitation")
 exports.invitation_index_get = async (req, res) => {
   const userId = req.session.user._id
   // reference: https://stackoverflow.com/questions/12821596/multiple-populates-mongoosejs
-  const invitations = await invitationOrganizer
-    .find({ user_id: userId })
-    .populate("user_id")
-    .populate("event_id")
-  res.render("invitations/index.ejs", { invitations })
+  const invitations = await invitationOrganizer.find({}).populate("event_id").populate("guests")
+  res.render("invitations/index.ejs", { invitations, userId })
 }
 
 exports.invitation_new_get = async (req, res) => {
@@ -27,14 +24,9 @@ exports.invitation_new_get = async (req, res) => {
 }
 
 exports.invitation_new_post = async (req, res) => {
-  console.log("req.params.eventId", req.params.eventId)
-
   req.body.user_id = req.session.user._id
   const event = await Event.findById(req.params.eventId)
-  console.log(event)
   if (event) {
-    console.log(event)
-
     event.eventStatus = "Sent"
     await event.save()
   }

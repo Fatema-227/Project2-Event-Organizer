@@ -41,7 +41,7 @@
       </button>
     </form>
 
-    <% if(invitations.sendInvitation === "default"){ %>
+    <% if(invitations.sendInvitation === "Draft"){ %>
     <form action="/invitations/<%= invitations._id %>" method="post">
       <br /><button type="submit">Send Invitation</button>
     </form>
