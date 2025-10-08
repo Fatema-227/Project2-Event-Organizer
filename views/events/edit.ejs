@@ -1,49 +1,66 @@
+<head>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
 <%-include("../partials/_navbar")%>
-edit <%=event.title%>
-<form action="/events/<%=event._id%>?_method=PUT" method="post">
+<div class="container create-event-container">
+  <header>
+    <h1>Edit <%= event.title %></h1>
+  </header>
+
+  <form action="/events/<%= event._id %>?_method=PUT" method="post" class="event-form">
+    <div class="form-group">
   <label for="title">Title</label>
   <input type="text" name="title" id="title" value="<%=event.title%>" />
-  <br />
+    </div>
+<div class="form-group">
+
   <label for="description">Description</label>
   <input type="text" name="description" id="description" value="<%=event.description%>"/>
-  <br />
+</div>
+<div class="form-group">
+
   <label for="time">Time</label>
   <input type="time" name="time" id="time" value="<%=event.time%>"required />
-  <br />
+</div>
+<div class="form-group">
+
   <label for="date">Date</label>
   <input type="date" name="date" id="date" value="<%=event.date%>"required />
-    <h6 style="margin: 0; color: red; display: none;" class="dateTime-warning">*You should choose date and time after the current date and time</h6>
-  <br />
+  <h6 style="margin: 0; color: red; display: none;" class="dateTime-warning">*You should choose date and time after the current date and time</h6>
+</div>
+<div class="form-group">
+
   <label for="address">Address</label>
-  <input type="text" name="address" id="address" value="<%=event.address%>" />
-  <br />
+    <input type="text" name="address" id="address" value="<%=event.address%>" />
+</div>
+<div class="form-group checkbox-group">
+
   <label for="isPublic">Is public?</label>
-  <input type="checkbox" name="isPublic" id="isPublic" <%if(event.isPublic){%> checked <%}%>/>
-  <br />
-  <div  id="limitContainer" <%if(!event.isPublic){%> style="display: none" <%}%>>
+    <input type="checkbox" name="isPublic" id="isPublic" <%if(event.isPublic){%> checked <%}%>/>
+</div>
+
+  <div  class="form-group" id="publicContainer" <%if(!event.isPublic){%> style="display: none" <%}%>>
     <label for="limit">Guests limit</label>
-    <input type="number" name="limit" id="limit" value="<%=event.limit%>"/>
-    <br />
+    <input type="number" name="limit" id="limit" value="<%=event.limit%>" min="0"/>
   </div>
-<input type="text" name="eventStatus" id="eventStatus" value="Sent" hidden>
+
   <button type="submit" id="draft">Update</button>
 </form>
+</div>
 <script>
-    let draftButton=document.querySelector("#draft")
-    let sendButton=document.querySelector("#send")
-    let status=document.querySelector("#eventStatus")
     isPublic.addEventListener("change", () => {
       if (isPublic.checked) {
-        limitContainer.style.display = "block"
+        publicContainer.style.display = "block"
         document.getElementById("limit").required=true
       } else {
-        limitContainer.style.display = "none"
+        publicContainer.style.display = "none"
         document.getElementById("limit").value = ""
       }
     })
-    const dateInput = document.getElementById('date')
-  const timeInput = document.getElementById('time')
 
+  const dateInput = document.getElementById('date')
+  const timeInput = document.getElementById('time')
   const validateTime=()=> {
     const selectedDate = new Date(dateInput.value)
     const today = new Date()
@@ -63,8 +80,6 @@ edit <%=event.title%>
       }
     }
   }
-
   dateInput.addEventListener('change', validateTime)
   timeInput.addEventListener('change', validateTime)
-
-    </script>
+</script>

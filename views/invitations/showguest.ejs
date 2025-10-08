@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
   <title>Show Invitation</title>
 </head>
 <body class="guest-invitation-body">
@@ -13,7 +14,7 @@
 
       <div class="invitation-card-back">
         <form action="/invitations/showguest/<%= invitations._id %>" method="post" class="invitation-response-form">
-          <h2 class="invitation-title"><%= invitations.event_id.title %></h2>
+          <h1 class="invitation-title"><%= invitations.event_id.title %></h1>
           <div class="card-back-info">
             <p class="invitation-description"><%= invitations.event_id.description %></p>
             <p class="invitation-date"><%= invitations.event_id.date %></p>
