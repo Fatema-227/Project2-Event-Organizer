@@ -8,17 +8,15 @@ const invitationOrganizerSchema = new mongoose.Schema({
   }],
   sendInvitation: {
     type: String,
-    default:"default"
+    default: "Draft"
   },
   event_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Event',
-    required: true
   },
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
   }
 },
   {

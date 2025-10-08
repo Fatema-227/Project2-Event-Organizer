@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show Invitation</title>
+</head>
+<body>
+
+  <form action="/invitations/showguest/<%= invitations._id%>" method="post">
+    <h2><%= invitations.event_id.title  %></h2>
+    <p><%= invitations.event_id.description  %></p>
+    <p><%= invitations.event_id.date  %></p>
+    <p><%= invitations.event_id.time  %></p>
+    <p><%= invitations.event_id.address  %></p>
+
+    <% if(!invitationResponse) { %>
+    <label for="invitationStatus">Are you going to attend the event?</label>
+    <select name="invitationStatus" id="invitationStatus">
+      <option value="Accepted">Accepted</option>
+      <option value="Declined">Declined</option>
+    </select>
+    <br><br>
+
+    <label for="comment">Comment</label><br>
+    <textarea name="comment" id="comment" row="3" cols="25"></textarea>
+    <br><br>
+
+    <button type="submit">Send response</button><p>*Please take care, can't change your response.</p>
+    <% } %>
+  </form>
+
+</body>
+</html>
