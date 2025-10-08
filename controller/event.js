@@ -1,7 +1,6 @@
 const Event = require("../models/event")
 
 exports.event_index_get = async (req, res) => {
-  const publicEvent = await Event.find().populate("user_id")
   const events = await Event.find({ user_id: req.session.user._id }).populate(
     "user_id"
   )
@@ -9,23 +8,27 @@ exports.event_index_get = async (req, res) => {
   //this part from chatGPT
   const now = new Date()
   for (let ev of events) {
-  let eventDateTime = new Date(ev.date)
-  if (ev.time) {
-    const [hours, minutes] = ev.time.split(":")
-    eventDateTime.setHours(hours)
-    eventDateTime.setMinutes(minutes)
-    eventDateTime.setSeconds(0)
-    eventDateTime.setMilliseconds(0)
+    let eventDateTime = new Date(ev.date)
+    if (ev.time) {
+      const [hours, minutes] = ev.time.split(":")
+      eventDateTime.setHours(hours)
+      eventDateTime.setMinutes(minutes)
+      eventDateTime.setSeconds(0)
+      eventDateTime.setMilliseconds(0)
+    }
+    if (now > eventDateTime && ev.eventStatus !== "Completed") {
+      ev.eventStatus = "Completed"
+      await ev.save()
+    } else if (now <= eventDateTime && ev.eventStatus === "Completed") {
+      ev.eventStatus = ev.isPublic ? "Sent" : "Draft"
+      await ev.save()
+    }
   }
-  if (now > eventDateTime && ev.eventStatus !== "Completed") {
-    ev.eventStatus = "Completed"
-    await ev.save()
-  } else if (now <= eventDateTime && ev.eventStatus === "Completed") {
-    ev.eventStatus = ev.isPublic ? "Sent" : "Draft"
-    await ev.save()
-  }
-}
-  res.render("events/index.ejs", { events, publicEvent, userInSession })
+  const updatedEvents = await Event.find({
+    user_id: req.session.user._id,
+  }).populate("user_id")
+  const updatedPublicEvents = await Event.find().populate("user_id")
+  res.render("events/index.ejs", { events: updatedEvents, publicEvent: updatedPublicEvents, userInSession })
 }
 
 exports.event_new_get = async (req, res) => {
