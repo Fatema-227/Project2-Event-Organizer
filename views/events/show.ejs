@@ -1,18 +1,17 @@
 
 <%- include("../partials/_navbar")%>
 <h1><%=events.title%></h1>
-<%if(events.description!==""){%>
-<p>Description: <%=events.description%></p>
-<%}%>
+
+<%if(events.description!==""){%> <p>Description: <%=events.description%></p> <%}%>
 <p>Time: <%= events.time %></p>
 <p>Date: <%= events.date %></p>
 <p>Address: <%=events.address%></p>
 <p>Is public? <%= events.isPublic ? 'yes' : 'no' %></p>
-
 <%if(events.isPublic===true){%>
 <p>Guests limit: <%=events.limit%></p>
 <input type="text" name="seats" id="seats" value="<%=events.limit%>" hidden />
-<%}%> <%if(events.user_id._id.equals(currentUser)){%>
+<%}
+if(events.user_id._id.equals(currentUser)){%>
 <button><a href="/events/<%=events._id%>/edit">Edit</a></button>
 <form action="/events/<%=events._id%>?_method=DELETE" method="post">
   <button type="submit">Delete event</button>
@@ -21,30 +20,18 @@
 <% if(events.eventStatus=="Draft" && !events.isPublic){ %>
 <form action="/events/<%=events._id%>/new" method="post">
   <input type="hidden" name="submitType" id="submitType" />
-  <button
-    type="submit"
-    id="send"
-    onclick="document.getElementById('submitType').value='invitation'"
-  >
-    Create invitation
-  </button>
+  <button type="submit" id="send" onclick="document.getElementById('submitType').value='invitation'">
+    Create invitation </button>
 </form>
-<% } } else{%>
+<% } }
+else{%>
 <% if(userHasBooked) { %>
-
 <form
-  action="/events/<%= events._id %>/booked-by/<%= user._id %>?_method=DELETE"
-  method="post"
->
-  <button type="submit">Cancel booking</button>
-</form>
-<% } else { %>
-<form
-  action="/events/<%= events._id %>/booked-by/<%= user._id %>"
-  method="post"
->
-  <button type="submit">Book a seat</button>
-</form>
-<% } %>
-<%} %>
+  action="/events/<%= events._id %>/booked-by/<%= user._id %>?_method=DELETE" method="post">
+  <button type="submit">Cancel booking</button></form>
+<% }
+else { %>
+<form action="/events/<%= events._id %>/booked-by/<%= user._id %>" method="post">
+  <button type="submit">Book a seat</button> </form>
+<% }} %>
 <button><a href="/events">Back</a></button>
