@@ -1,4 +1,5 @@
 <%-include("../partials/_navbar")%>
+
 edit <%=event.title%>
 <form action="/events/<%=event._id%>?_method=PUT" method="post">
   <label for="title">Title</label>
@@ -12,7 +13,7 @@ edit <%=event.title%>
   <br />
   <label for="date">Date</label>
   <input type="date" name="date" id="date" value="<%=event.date%>"required />
-    <h6 style="margin: 0; color: red; display: none;" class="dateTime-warning">*You should choose date and time after the current date and time</h6>
+  <h6 style="margin: 0; color: red; display: none;" class="dateTime-warning">*You should choose date and time after the current date and time</h6>
   <br />
   <label for="address">Address</label>
   <input type="text" name="address" id="address" value="<%=event.address%>" />
@@ -20,18 +21,17 @@ edit <%=event.title%>
   <label for="isPublic">Is public?</label>
   <input type="checkbox" name="isPublic" id="isPublic" <%if(event.isPublic){%> checked <%}%>/>
   <br />
+
   <div  id="limitContainer" <%if(!event.isPublic){%> style="display: none" <%}%>>
     <label for="limit">Guests limit</label>
     <input type="number" name="limit" id="limit" value="<%=event.limit%>"/>
     <br />
   </div>
-<input type="text" name="eventStatus" id="eventStatus" value="Sent" hidden>
+
   <button type="submit" id="draft">Update</button>
 </form>
+
 <script>
-    let draftButton=document.querySelector("#draft")
-    let sendButton=document.querySelector("#send")
-    let status=document.querySelector("#eventStatus")
     isPublic.addEventListener("change", () => {
       if (isPublic.checked) {
         limitContainer.style.display = "block"
@@ -41,9 +41,9 @@ edit <%=event.title%>
         document.getElementById("limit").value = ""
       }
     })
-    const dateInput = document.getElementById('date')
-  const timeInput = document.getElementById('time')
 
+  const dateInput = document.getElementById('date')
+  const timeInput = document.getElementById('time')
   const validateTime=()=> {
     const selectedDate = new Date(dateInput.value)
     const today = new Date()
@@ -63,8 +63,6 @@ edit <%=event.title%>
       }
     }
   }
-
   dateInput.addEventListener('change', validateTime)
   timeInput.addEventListener('change', validateTime)
-
-    </script>
+</script>
