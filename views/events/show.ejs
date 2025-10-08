@@ -1,37 +1,52 @@
-
+<head>
+  <link rel="stylesheet" href="/style.css">
+</head>
 <%- include("../partials/_navbar")%>
-<h1><%=events.title%></h1>
 
-<%if(events.description!==""){%> <p>Description: <%=events.description%></p> <%}%>
-<p>Time: <%= events.time %></p>
-<p>Date: <%= events.date %></p>
-<p>Address: <%=events.address%></p>
-<p>Is public? <%= events.isPublic ? 'yes' : 'no' %></p>
-<%if(events.isPublic===true){%>
-<p>Guests limit: <%=events.limit%></p>
-<input type="text" name="seats" id="seats" value="<%=events.limit%>" hidden />
-<%}
-if(events.user_id._id.equals(currentUser)){%>
-<button><a href="/events/<%=events._id%>/edit">Edit</a></button>
-<form action="/events/<%=events._id%>?_method=DELETE" method="post">
-  <button type="submit">Delete event</button>
-</form>
-<br />
-<% if(events.eventStatus=="Draft" && !events.isPublic){ %>
-<form action="/events/<%=events._id%>/new" method="post">
-  <input type="hidden" name="submitType" id="submitType" />
-  <button type="submit" id="send" onclick="document.getElementById('submitType').value='invitation'">
-    Create invitation </button>
-</form>
-<% } }
-else{%>
-<% if(userHasBooked) { %>
-<form
-  action="/events/<%= events._id %>/booked-by/<%= user._id %>?_method=DELETE" method="post">
-  <button type="submit">Cancel booking</button></form>
-<% }
-else { %>
-<form action="/events/<%= events._id %>/booked-by/<%= user._id %>" method="post">
-  <button type="submit">Book a seat</button> </form>
-<% }} %>
-<button><a href="/events">Back</a></button>
+<div class="details-container">
+  <h1><%=events.title%></h1>
+  <div class="content">
+  <%if(events.description!==""){%>
+    <p><span>Description:</span> <%=events.description%></p>
+  <%}%>
+
+  <p><span>Time:</span> <%= events.time %></p>
+  <p><span>Date:</span> <%= events.date %></p>
+  <p><span>Address:</span> <%=events.address%></p>
+  <p><span>Is public?</span> <%= events.isPublic ? 'Yes' : 'No' %></p>
+
+  <%if(events.isPublic===true){%>
+  <p><span>Guests limit:</span> <%=events.limit%></p>
+  <input type="text" name="seats" id="seats" value="<%=events.limit%>" hidden />
+  <%}%>
+<div class="buttons">
+  <% if(events.user_id._id.equals(currentUser)){ %>
+    <button><a href="/events/<%=events._id%>/edit">Edit</a></button>
+    <form action="/events/<%=events._id%>?_method=DELETE" method="post">
+      <button type="submit">Delete event</button>
+    </form>
+
+    <% if(events.eventStatus=="Draft" && !events.isPublic){ %>
+    <form action="/events/<%=events._id%>/new" method="post">
+      <input type="hidden" name="submitType" id="submitType" />
+      <button type="submit" id="send" onclick="document.getElementById('submitType').value='invitation'">
+        Create invitation
+      </button>
+    </form>
+    <% } %>
+  <% } else { %>
+    <% if(userHasBooked) { %>
+    <form action="/events/<%= events._id %>/booked-by/<%= user._id %>?_method=DELETE" method="post">
+      <button type="submit">Cancel booking</button>
+    </form>
+    <% } else { %>
+    <form action="/events/<%= events._id %>/booked-by/<%= user._id %>" method="post">
+      <button type="submit">Book a seat</button>
+    </form>
+    <% } %>
+  <% } %>
+
+  <button><a href="/events">Back</a></button>
+  </div>
+  </div>
+</div>

@@ -1,19 +1,45 @@
-<%-include("../partials/_navbar.ejs")%>
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+<%- include("../partials/_navbar.ejs") %>
 
-<h2>Public events</h2>
-<% publicEvent.forEach((event) => {
-  if (event.isPublic) {
-    if ( (event.eventStatus !== "Completed" && event.eventStatus !== "Draft")||event.user_id._id == user._id) { %>
-      <ul> <li> <a href="/events/<%= event._id %>">
-      <%= event.title %> | <%= event.eventStatus %> | Will be held on <%= event.date %> at <%= event.time %> | Created by <%= event.user_id.username %>
-      </a> </li> </ul>
-    <% } else if (event.eventStatus == "Completed" && event.user_id._id !== user._id) { %>
-      <ul> <li>
-    <%= event.title %> | <%= event.eventStatus %> | Will be held on <%= event.date %> at <%= event.time %> | Created by : <%= event.user_id.username %>
-  </li> </ul>
-    <% }}}) %>
+<a href="/events/new" class="floating-add-btn">+</a>
 
-<h2>My events</h2>
-<%events.forEach((event)=>{ if(!event.isPublic){%>
-<ul> <li> <a href="/events/<%=event._id%>"> <%=event.title%> | <%=event.eventStatus%></a> </li> </ul>
-<%}})%>
+<div class="container">
+  <header>
+    <h1>Events Overview</h1>
+  </header>
+
+  <section class="public-events">
+    <h2>Public Events</h2>
+    <% publicEvent.forEach((event) => {
+      if (event.isPublic) {
+        if ((event.eventStatus !== "Completed" && event.eventStatus !== "Draft") || event.user_id._id == user._id) { %>
+          <div class="event-card">
+            <a href="/events/<%= event._id %>">
+              <h3><%= event.title %></h3>
+              <p><%= event.eventStatus %> | <%= event.date %> at <%= event.time %></p>
+              <p class="creator">Created by <%= event.user_id.username %></p>
+            </a>
+          </div>
+        <% } else if (event.eventStatus == "Completed" && event.user_id._id !== user._id) { %>
+          <div class="event-card completed">
+            <h3><%= event.title %></h3>
+            <p><%= event.eventStatus %> | <%= event.date %> at <%= event.time %></p>
+            <p class="creator">Created by <%= event.user_id.username %></p>
+          </div>
+        <% }}}) %>
+  </section>
+
+  <section class="my-events">
+    <h2>My Events</h2>
+    <% events.forEach((event) => { if (!event.isPublic) { %>
+      <div class="event-card my-event">
+        <a href="/events/<%= event._id %>">
+          <h3><%= event.title %></h3>
+          <p><%= event.eventStatus %> | <%= event.date %> at <%= event.time %></p>
+        </a>
+      </div>
+    <% }}) %>
+  </section>
+</div>
