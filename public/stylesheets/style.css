@@ -1,0 +1,1022 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #f7f3f0;
+  color: #3d2c2c;
+  min-height: 100vh;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav {
+  background-color: #6a1b2d;
+  padding: 20px 30px;
+  border-bottom: 4px solid #c7a17a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 12px rgba(106, 27, 45, 0.1);
+  width: 100vw;
+  margin: 0;
+  position:relative;
+  top: -40px;
+  z-index: 999;
+  margin-bottom: 20px;
+}
+
+nav a {
+  color: #f5f0ea;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+nav a:hover {
+  color: #e7c9a9;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+nav p {
+  color: #f5f0ea;
+  margin: 0;
+  font-weight: 500;
+}
+
+.invitation-page {
+  width: 80%;
+  max-width: 900px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(90, 50, 50, 0.2);
+  padding: 30px 40px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.invitation-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.invitation-header h1 {
+  color: #5b2c2c;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.invitation-list {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.invitation-item {
+  margin: 10px 0;
+}
+
+.invitation-link,
+.invitation-completed {
+  display: block;
+  padding: 15px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(139, 69, 69, 0.1);
+  border-left: 5px solid #6a1b2d;
+  background-color: #f2e4d6;
+  color: #5a4a43;
+}
+
+.disabled-link {
+  pointer-events: none;
+  opacity: 0.6;
+  cursor: not-allowed;
+  text-decoration: none;
+  color: #888;
+}
+
+.invitation-draft {
+  background-color: #fdfaf7;
+  border-left-color: #c7a17a;
+}
+
+.invitation-sent {
+  background-color: #f7ebe6;
+  border-left-color: #6a1b2d;
+}
+
+.invitation-guest {
+  background-color: #f8ece2;
+  border-left-color: #a0765c;
+}
+
+.invitation-completed {
+  background-color: #eae2dc;
+  color: #6b4e4e;
+  opacity: 0.7;
+  cursor: not-allowed;
+  pointer-events: none;
+  border-left-color: #c7a17a;
+}
+
+.invitation-link:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(139, 69, 69, 0.2);
+}
+
+/* edit ejs --> invitation */
+.container-invitation-event {
+  width: 80%;
+  max-width: 900px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(90, 50, 50, 0.2);
+  padding: 30px 40px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.form-invitation-event {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-invitation-event {
+  color: #4a1023;
+  border-left: 6px solid #c7a17a;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.8rem;
+}
+
+.description-invitation-event,
+.date-invitation-event,
+.time-invitation-event,
+.address-invitation-event {
+  color: #5a4a43;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.label-invitation-event {
+  font-weight: 600;
+  color: #7a5c5c;
+  margin-top: 15px;
+  display: block;
+  font-size: 1rem;
+}
+
+.select-guests {
+  width: 100%;
+  min-height: 100px;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #e3cfcf;
+  background-color: #fdfaf7;
+  color: #5a4a43;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  box-shadow: 0 2px 8px rgba(139, 69, 69, 0.1);
+  transition: border-color 0.3s ease;
+}
+.select-guests:focus {
+  outline: none;
+  border-color: #6a1b2d;
+  box-shadow: 0 0 5px #6a1b2d;
+}
+
+.add-guest {
+  background-color: #6a1b2d;
+  color: #fdfaf7;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: fit-content;
+}
+.add-guest:hover:not([style*="not-allowed"]) {
+  background-color: #5b1a29;
+}
+.add-guest[style*="not-allowed"] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.submit-button {
+  margin-top: 20px;
+  background-color: #c7a17a;
+  color: #4a1023;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button.submit-button:hover {
+  background-color: #a98156;
+}
+
+.section-subtitle {
+  margin-top: 40px;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #4a1023;
+  letter-spacing: 1px;
+  border-left: 6px solid #c7a17a;
+  padding-left: 10px;
+  text-transform: uppercase;
+}
+
+.list-guests {
+  list-style-type: disc;
+  margin-left: 20px;
+  color: #6a1b2d;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.my-events.my-event.event-card {
+  background-color: #f2e4d6;
+  border-left: 5px solid #6a1b2d;
+  border-radius: 12px;
+  margin: 15px 0;
+  padding: 15px 20px 0px 20px;
+  box-shadow: 0 2px 8px rgba(139, 69, 69, 0.1);
+  transition: all 0.3s ease;
+  list-style-type: none;
+}
+.my-events.my-event.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(139, 69, 69, 0.2);
+}
+
+.guest-item {
+  font-weight: 600;
+  color: #6a1b2d;
+  font-size: 1rem;
+  padding-bottom: 8px;
+}
+
+.delete-guest-form {
+  margin-top: 8px;
+}
+
+.delete-guest-button {
+  background-color: #c7a17a;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 12px;
+  color: #4a1023;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.delete-guest-button:hover {
+  background-color: #a68156;
+}
+
+/* new ejs --> invitation */
+.inv-form {
+  background-color: #fff;
+  width: 80%;
+  max-width: 900px;
+  border-radius: 16px;
+  padding: 30px 40px;
+  box-shadow: 0 4px 15px rgba(90, 50, 50, 0.2);
+  animation: fadeIn 0.6s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.inv-title {
+  color: #4a1023;
+  border-left: 6px solid #c7a17a;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.8rem;
+}
+
+.inv-subtitle {
+  margin-top: 40px;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #4a1023;
+  letter-spacing: 1px;
+  border-left: 6px solid #c7a17a;
+  padding-left: 10px;
+  text-transform: uppercase;
+}
+
+.inv-description,
+.inv-date,
+.inv-time,
+.inv-address {
+  color: #5a4a43;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.inv-label {
+  font-weight: 600;
+  color: #7a5c5c;
+  margin-top: 15px;
+  display: block;
+  font-size: 1rem;
+}
+
+.inv-select-guests {
+  width: 100%;
+  min-height: 100px;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #e3cfcf;
+  background-color: #fdfaf7;
+  color: #5a4a43;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  box-shadow: 0 2px 8px rgba(139, 69, 69, 0.1);
+  transition: border-color 0.3s ease;
+}
+.inv-select-guests:focus {
+  outline: none;
+  border-color: #6a1b2d;
+  box-shadow: 0 0 5px #6a1b2d;
+}
+
+.inv-add-guest {
+  background-color: #6a1b2d;
+  color: #fdfaf7;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: fit-content;
+  margin-bottom: 15px;
+}
+.inv-add-guest:hover:not([style*="not-allowed"]) {
+  background-color: #5b1a29;
+}
+.inv-add-guest[style*="not-allowed"] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.inv-submit-button {
+  background-color: #c7a17a;
+  color: #4a1023;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+}
+.inv-submit-button:hover {
+  background-color: #a98156;
+}
+
+.inv-guest-list-container {
+  margin-top: 10px;
+}
+
+.inv-list-guests {
+  list-style-type: disc;
+  margin-left: 20px;
+  color: #6a1b2d;
+  font-weight: 600;
+}
+
+.inv-my-guest {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #6a1b2d;
+  font-size: 1rem;
+}
+
+/* show ejs --> invitation */
+.show-invitation-form {
+  background: #fff;
+  padding: 25px 35px;
+  border-radius: 12px;
+  width: 500px;
+  box-shadow: 0 4px 15px rgba(66, 41, 26, 0.15);
+}
+
+.show-invitation-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  border-left: 6px solid #c7a17a;
+  padding-left: 12px;
+  text-transform: uppercase;
+  color: #6b2e2e;
+  letter-spacing: 1.2px;
+}
+
+.show-invitation-description,
+.show-invitation-date,
+.show-invitation-time,
+.show-invitation-address {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #5b4335;
+}
+
+.show-guests-subtitle {
+  margin-top: 40px;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #4a1023;
+  letter-spacing: 1px;
+  border-left: 6px solid #c7a17a;
+  padding-left: 10px;
+  text-transform: uppercase;
+}
+
+/* show.ejs ul (invitation) replace with <ul class="my-events my-event event-card"> */
+/* .guest-list {
+  list-style-type: disc;
+  padding-left: 25px;
+  margin-bottom: 10px;
+} */
+
+.guest-item {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #6a3b3b;
+}
+
+.guest-name {
+  letter-spacing: 1px;
+}
+
+.guest-response-list {
+  background-color: #fdf7f1;
+  margin-left: 40px;
+  margin-bottom: 20px;
+  border-left: 4px solid #c7a17a;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #5a4032;
+}
+
+.response-title {
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #4a1023;
+}
+
+.response-status,
+.response-comment {
+  margin-left: 10px;
+  margin-bottom: 4px;
+}
+
+.edit-invitation-button {
+  margin-top: 20px;
+  background-color: #6b2e2e;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 18px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.edit-invitation-button:hover {
+  background-color: #522222;
+}
+
+.edit-link {
+  color: #f9f4f2;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.send-invitation-form,
+.delete-invitation-form {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.send-invitation-button,
+.delete-invitation-button {
+  background-color: #c7a17a;
+  color: #4a1023;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 18px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.send-invitation-button:hover,
+.delete-invitation-button:hover {
+  background-color: #a98156;
+}
+
+/* show guest page */
+.invitation-flip-container {
+  perspective: 1200px;
+  width: 500px;
+  height: 680px;
+}
+
+.invitation-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: flipCard 1s ease forwards;
+  animation-delay: 2s;
+}
+
+.invitation-card-front,
+.invitation-card-back {
+  position: absolute;
+  width: 100%;
+  height: 80%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  box-sizing: border-box;
+  transition: transform 0.6s ease;
+}
+
+.invitation-card-front {
+  background-image: url('/images/bg-card.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.invitation-card-back {
+  background-image: url('/images/bg-front.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: #333;
+  transform: rotateY(180deg);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 30px;
+  text-align: center;
+}
+
+.card-back-info{
+  padding-top: 30px;
+  max-width: 90%;
+}
+
+@keyframes flipCard {
+  from {
+    transform: rotateY(0);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
+.invitation-title {
+  padding-top: 20px;
+  font-size: 1.8rem;
+  color: #6a1b2d;
+}
+
+.invitation-description{
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-size: 1rem;
+  color: #4a1023;
+}
+
+.invitation-date,
+.invitation-time,
+.invitation-address {
+  font-size: 1.1rem;
+  color: #5a4a43;
+  margin-bottom: 10px;
+}
+
+.invitation-response-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 90%;
+}
+
+.invitation-label {
+  font-weight: bold;
+  color: #4a1023;
+}
+
+.invitation-select,
+.invitation-textarea {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.invitation-submit-button {
+  background-color: #4a1023;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.invitation-submit-button:hover {
+  background-color: #3a0d1b;
+}
+
+.invitation-note {
+  font-size: 0.85rem;
+  color: #6b4e4e;
+  margin-top: 10px;
+}
+
+/* send ejs --> invitation */
+.successful-message{
+  font-size: 2.5rem;
+  text-align: center;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 90vw;
+  line-height: 1.2;
+}
+
+.important-msg{
+  color: #4a1023;
+}
+
+.container {
+  width: 80%;
+  max-width: 900px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(90, 50, 50, 0.2);
+  padding: 30px 40px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+header h1 {
+  color: #5b2c2c;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+.subtitle {
+  font-size: 1rem;
+  color: #7a5c5c;
+}
+h2 {
+  color: #4a1023;
+  border-left: 6px solid #c7a17a;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.event-card {
+  background-color: #fdfaf7;
+  border: 1px solid #e3cfcf;
+  border-radius: 12px;
+  margin: 15px 0;
+  padding: 15px 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(139, 69, 69, 0.1);
+}
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(139, 69, 69, 0.2);
+}
+.event-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.event-card h3 {
+  margin-bottom: 5px;
+  color: #6a1b2d;
+  font-size: 1.3rem;
+}
+.event-card p {
+  margin: 5px 0;
+  color: #5a4a43;
+}
+.creator {
+  color: #a0765c;
+}
+.my-events {
+  margin-top: 40px;
+}
+.my-event {
+  background-color: #f2e4d6;
+  border-left: 5px solid #6a1b2d;
+}
+.event-card.completed {
+  background-color: #f7efe8; /* بيج باهت */
+  color: #6b4e4e; /* ماروني باهت */
+  opacity: 0.7;
+  cursor: not-allowed;
+  pointer-events: none;
+  position: relative;
+}
+.event-card {
+  border-left: 5px solid #6a1b2d;
+  background-color: #f7efe8;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.completed {
+  background-color: #f8ece2;
+  border-left: 5px solid #c7a17a;
+}
+.floating-add-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #800000;
+  color: #fdfaf7;
+  font-size: 32px;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(128, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.floating-add-btn:hover {
+  background-color: #a52a2a; /* ماروني أفتح */
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(128, 0, 0, 0.4);
+}
+/* ===== صفحة إنشاء حدث جديد ===== */
+.create-event-container {
+  width: 80%;
+  max-width: 700px;
+  background-color: #fffaf7; /* بيج فاتح مشابه للصفحة الرئيسية */
+  border-radius: 16px;
+  padding: 30px 40px;
+  box-shadow: 0 4px 15px rgba(90, 50, 50, 0.2);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.create-event-container header h1 {
+  color: #5b2c2c;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.create-event-container .subtitle {
+  text-align: center;
+  color: #7a5c5c;
+  font-size: 1rem;
+  margin-bottom: 25px;
+}
+
+.event-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.event-form label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #4a1023;
+}
+
+.event-form input[type="text"],
+.event-form input[type="number"],
+.event-form input[type="date"],
+.event-form input[type="time"] {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e3cfcf;
+  background-color: #fdfaf7;
+  color: #3d2c2c;
+  font-size: 1rem;
+}
+
+.event-form .checkbox-group {
+  flex-direction: row;
+  align-items: center;
+}
+
+.event-form .checkbox-group label {
+  margin-right: 10px;
+}
+
+.event-form .dateTime-warning {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  display: none;
+}
+
+.event-form .form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.event-form button {
+  padding: 10px 20px;
+  background-color: #800000; /* عنابي */
+  color: #fdfaf7;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.event-form button:hover {
+  background-color: #a52a2a;
+  transform: translateY(-2px);
+}
+
+.event-form button:active {
+  transform: scale(0.97);
+}
+
+.event-btn {
+  background-color: #800000; /* عنابي */
+  color: #fdfaf7; /* بيج فاتح */
+  border: none;
+  padding: 10px 25px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.event-btn:hover {
+  background-color: #a52a2a; /* ماروني أفتح */
+  transform: scale(1.05);
+}
+.details-container {
+  width: 900px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.details-container h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.details-container p {
+  font-size: 20px;
+  margin: 8px 0;
+  color: #555;
+}
+
+.details-container p span {
+  font-weight: bold;
+  color: #222;
+}
+
+.details-container form,
+.details-container button {
+  text-align: center;
+}
+
+.details-container button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.details-container button:hover {
+  background-color: #45a049;
+}
+
+.details-container a {
+  color: white;
+  text-decoration: none;
+}
+
+.details-container form button[type="submit"]:nth-child(1) {
+  background-color: #f44336;
+}
+
+.details-container form button[type="submit"]:nth-child(1):hover {
+  background-color: #d32f2f;
+}
+
+/* Back button */
+.details-container button:last-child {
+  background-color: #555;
+}
+
+.details-container button:last-child:hover {
+  background-color: #333;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* عشان لو الشاشه صغيره ينزلون تحت */
+  gap: 15px;
+  margin-top: 25px;
+}
+.content{
+  text-align: center
+}
+
+.buttons button,
+.buttons form button {
+  width: 150px;
+  height: 52px;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

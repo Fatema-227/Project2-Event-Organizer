@@ -3,28 +3,21 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>  Event and Invitations App </title>
-<link rel="stylesheet" href="/style.css" />
+<title>  Event Organizer App </title>
 </head>
 <body>
-  <header>
-
 <nav>
-<% if (!user) { %>
-<a href="/auth/sign-up"> Sign up </a>
-<a href="/auth/sign-in"> Sign in </a>
-<% } else { %>
-  <p>Welcome to event organizer App! <%= user.username %>.</p>
-  <a href="/auth/sign-out"> Sign Out </a><br />
-  <a href="/user/<%= user._id %>">My Profile</a> <br>
-  <a href="/events">Go to the events</a> <br>
-  <a href="/events/new">Create new event</a><br>
-  <a href="/invitations">Invitations</a> <br>
-  <% } %>
+  <% if (!user) { %>
+  <a href="/auth/sign-up"> Sign up </a>
+  <a href="/auth/sign-in"> Sign in </a>
+  <% } else { %>
+    <a href"#">Home</a><br>
+    <a href="/events">Go to the events</a>
+    <a href="/events/new">Create new event</a>
+    <a href="/invitations">Invitations</a>
+    <a href="/user/<%= user._id %>">My Profile</a>
+    <a href="/auth/sign-out"> Sign Out </a>
+    <% } %>
 </nav>
-  </header>
-<main>
-</main>
-
 </body>
 </html>
