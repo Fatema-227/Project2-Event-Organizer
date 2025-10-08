@@ -9,19 +9,22 @@ exports.event_index_get = async (req, res) => {
   //this part from chatGPT
   const now = new Date()
   for (let ev of events) {
-    let eventDateTime = new Date(ev.date)
-    if (ev.time) {
-      const [hours, minutes] = ev.time.split(":")
-      eventDateTime.setHours(hours)
-      eventDateTime.setMinutes(minutes)
-      eventDateTime.setSeconds(0)
-      eventDateTime.setMilliseconds(0)
-    }
-    if (now > eventDateTime && ev.eventStatus !== "Completed") {
-      ev.eventStatus = "Completed"
-      await ev.save()
-    }
+  let eventDateTime = new Date(ev.date)
+  if (ev.time) {
+    const [hours, minutes] = ev.time.split(":")
+    eventDateTime.setHours(hours)
+    eventDateTime.setMinutes(minutes)
+    eventDateTime.setSeconds(0)
+    eventDateTime.setMilliseconds(0)
   }
+  if (now > eventDateTime && ev.eventStatus !== "Completed") {
+    ev.eventStatus = "Completed"
+    await ev.save()
+  } else if (now <= eventDateTime && ev.eventStatus === "Completed") {
+    ev.eventStatus = ev.isPublic ? "Sent" : "Draft"
+    await ev.save()
+  }
+}
   res.render("events/index.ejs", { events, publicEvent, userInSession })
 }
 
