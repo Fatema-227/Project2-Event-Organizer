@@ -31,22 +31,22 @@ exports.user_update_put = async (req, res) => {
 
   const hashedPass = bcrypt.hashSync(req.body.newPassword, 10)
 
-  await User.findByIdAndUpdate(req.params.userId,{
-    username:req.body.username,
-    email:req.body.email,
-    password:hashedPass
+  await User.findByIdAndUpdate(req.params.userId, {
+    username: req.body.username,
+    email: req.body.email,
+    password: hashedPass,
   })
   res.redirect(`/user/${req.params.userId}`)
 }
 
-exports.user_update_picture=async (req,res)=>{
-  if(req.file){
-    req.body.picture=`/uploads/${req.file.filename}`
+exports.user_update_picture = async (req, res) => {
+  if (req.file) {
+    req.body.picture = `${req.file.filename}`
   }
-  await User.findByIdAndUpdate(req.params.userId,{picture:req.body.picture})
+  await User.findByIdAndUpdate(req.params.userId, { picture: req.body.picture })
 
-  if (req.session.user){
-    req.session.picture=req.body.picture
+  if (req.session.user) {
+    req.session.picture = req.body.picture
   }
   res.redirect(`/user/${req.params.userId}`)
 }
