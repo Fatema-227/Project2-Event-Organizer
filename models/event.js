@@ -32,7 +32,11 @@ const eventSchema = new mongoose.Schema({
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-  }
+  },bookedByUsers:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  }]
+
 },
   {
     timestamps: true

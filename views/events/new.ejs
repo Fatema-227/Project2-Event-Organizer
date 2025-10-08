@@ -10,8 +10,16 @@
   <input type="time" name="time" id="time" required />
   <br />
   <label for="date">Date</label>
-  <input type="date" name="date" id="date" min="<%= new Date().toISOString().slice(0,10) %>" required />
-  <h6 style="margin: 0; color: red; display: none;" class="dateTime-warning">*You should choose date and time after the current date and time</h6>
+  <input
+    type="date"
+    name="date"
+    id="date"
+    min="<%= new Date().toISOString().slice(0,10) %>"
+    required
+  />
+  <h6 style="margin: 0; color: red; display: none" class="dateTime-warning">
+    *You should choose date and time after the current date and time
+  </h6>
 
   <br />
   <label for="address">Address</label>
@@ -20,65 +28,87 @@
   <label for="isPublic">Is public?</label>
   <input type="checkbox" name="isPublic" id="isPublic" />
   <br />
-  <div  id="limitContainer" style="display: none">
+  <div id="publicContainer" style="display: none">
     <label for="limit">Guests limit</label>
-    <input type="number" name="limit" id="limit"/>
+    <input type="number" name="limit" id="limit" min="1"/>
+    <br>
+    <button
+      type="submit"
+      class="draft"
+      id="create"
+      onclick="document.getElementById('submitType').value='draft'"
+    >
+      Create
+    </button>
     <br />
   </div>
-<input type="text" name="eventStatus" id="eventStatus" value="draft" hidden>
-  <!-- <label for="eventStatus">Event status</label>
-  <select name="eventStatus" id="eventStatus">
-    <option value="Draft">Draft</option>
-    <option value="Sent">Sent</option>
-    <option value="Completed">Completed</option>
-  </select>
-  <br /> -->
-  <button type="submit" id="draft">Draft</button>
+  <input type="text" name="eventStatus" id="eventStatus" value="Draft" hidden />
+  <input type="hidden" name="submitType" id="submitType" />
+<div id="privateContainer">
+  <button
+    type="submit"
+    class="draft"
+    id="draft"
+    onclick="document.getElementById('submitType').value='draft'"
+  >
+    Draft
+  </button>
+
+  <button
+    type="submit"
+    id="send"
+    onclick="document.getElementById('submitType').value='invitation'"
+  >
+    Create invitation
+  </button>
+</div>
+
 </form>
 
-  <script>
-    let draftButton=document.querySelector("#draft")
-    let sendButton=document.querySelector("#send")
-    let status=document.querySelector("#eventStatus")
-    isPublic.addEventListener("change", () => {
-      if (isPublic.checked) {
-        limitContainer.style.display = "block"
-        document.getElementById("limit").required=true
-      } else {
-        limitContainer.style.display = "none"
-        document.getElementById("limit").value = ""
-      }
-    })
-    draftButton.addEventListener(("click"),()=>{
-      status.value="Draft"
-    })
-    sendButton.addEventListener(("click"),()=>{
-      status.value="Sent"
-    })
-    // This part from chatGPT
-  const dateInput = document.getElementById('date')
-  const timeInput = document.getElementById('time')
+<script>
+  let draftButton = document.querySelector(".draft")
+  let sendButton = document.querySelector("#send")
+  let status = document.querySelector("#eventStatus")
+  isPublic.addEventListener("change", () => {
+    if (isPublic.checked) {
+      publicContainer.style.display = "block"
+      document.getElementById("limit").required = true
+      privateContainer.style.display="none"
+    } else {
+      publicContainer.style.display = "none"
+      document.getElementById("limit").value = ""
+      privateContainer.style.display="block"
+    }
+  })
+  document.querySelector("#draft").addEventListener("click", () => {
+    status.value = "Draft"
+  })
+  document.querySelector("#create").addEventListener("click", () => {
+    status.value = "Sent"
+  })
+  // This part from chatGPT
+  const dateInput = document.getElementById("date")
+  const timeInput = document.getElementById("time")
 
-  const validateTime=()=> {
+  const validateTime = () => {
     const selectedDate = new Date(dateInput.value)
     const today = new Date()
     if (
       selectedDate.toDateString() === today.toDateString() &&
       timeInput.value
     ) {
-      const [h,m] = timeInput.value.split(':')
+      const [h, m] = timeInput.value.split(":")
       const selectedTime = new Date(selectedDate)
       selectedTime.setHours(h, m, 0, 0)
       if (selectedTime < today) {
-        document.querySelector(".dateTime-warning").style.display="block"
-        timeInput.value = ''
-      }
-      else{
-        document.querySelector(".dateTime-warning").style.display="none"
+        document.querySelector(".dateTime-warning").style.display = "block"
+        timeInput.value = ""
+      } else {
+        document.querySelector(".dateTime-warning").style.display = "none"
       }
     }
   }
 
-  dateInput.addEventListener('change', validateTime)
-  timeInput.addEventListener('change', validateTime)
-  </script>
+  dateInput.addEventListener("change", validateTime)
+  timeInput.addEventListener("change", validateTime)
+</script>

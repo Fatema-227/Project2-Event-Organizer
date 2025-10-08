@@ -1,7 +1,7 @@
 const router = require("express").Router()
 
 //Import controller
-const invitationCtrl = require('../controller/invitation')
+const invitationCtrl = require("../controller/invitation")
 
 router.get('/', invitationCtrl.invitation_index_get)
 router.get('/new/:eventId', invitationCtrl.invitation_new_get)
