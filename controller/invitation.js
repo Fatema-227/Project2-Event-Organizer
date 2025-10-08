@@ -31,15 +31,14 @@ exports.invitation_new_post = async (req, res) => {
 exports.invitation_show_get = async (req, res) => {
   const invitations = await invitationOrganizer.findById(req.params.invitationId).populate("event_id").populate("guests")
   const currentUser = req.session.user._id
-  res.render("invitations/show.ejs", {invitations, currentUser})
+  const invitationResponse = await invitation.findById(req.params.invitationId).populate('guest_id')
+  res.render("invitations/show.ejs", {invitations, currentUser, invitationResponse})
 }
 
 exports.invitation_show_guest_get = async (req, res) => {
   const invitations = await invitationOrganizer.findById(req.params.invitationId).populate("event_id").populate("guests")
   const currentUser = req.session.user._id
-  // reference: https://www.mongodb.com/docs/manual/reference/method/db.collection.findOne/
   const invitationResponse = await invitation.findOne({
-    guest_id: currentUser,
     invitationCreated_id: req.params.invitationId
   })
   res.render("invitations/showguest.ejs", {invitations, currentUser, invitationResponse})

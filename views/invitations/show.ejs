@@ -20,10 +20,12 @@
     <h4>All Guests</h4>
     <% invitations.guests.forEach((user)=>{%>
     <ul>
-      <li><%= user.username.toUpperCase() %></li>
+      <li>
+        <%= user.username.toUpperCase() %>
+      </li>
     </ul>
     <%})%>
-
+    <%  %>
     <button type="submit"><a href="/invitations/edit/<%= invitations._id %>">Edit Invitation</a></button>
   </form>
 
@@ -37,3 +39,4 @@
     <br><button type="submit">Delete Invitation</button>
   </form>
   <% } %>
+
