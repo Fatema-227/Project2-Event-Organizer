@@ -4,9 +4,24 @@
 <body>
   <%-include("../partials/_navbar.ejs")%>
   <% invitations.forEach((invitation)=>{%>
+  <% if(invitation.user_id.equals(userId) && invitation.sendInvitation === "Draft"){ %>
 <ul>
-  <li><a href="/invitations/<%= invitation._id%>"><%= invitation.event_id.title %> Invitation</a></li>
+  <li><a href="/invitations/<%= invitation._id%>"><%= invitation.event_id.title %> Invitation || Draft</a></li>
 </ul>
-<%})%>
+  <% }else if(invitation.user_id.equals(userId) && invitation.sendInvitation === "Sent"){ %>
+<ul>
+  <li><a href="/invitations/<%= invitation._id%>"><%= invitation.event_id.title %> Invitation || Sent</a></li>
+</ul>
+  <% } else if(invitation.sendInvitation === "Sent" && invitation.guests.some(guest => guest._id.equals(userId))) {%>
+<ul>
+  <li><a href="/invitations/showguest/<%= invitation._id%>"><%= invitation.event_id.title %> Invitation</a></li>
+</ul>
+  <% } else if(invitation.event_id.eventStatus === "Completed" && invitation.guests.some(guest => guest._id.equals(userId))) {%>
+<ul>
+  <li><button class="completed-event" style="cursor: not-allowed;"><%= invitation.event_id.title %> Invitation</button></li>
+</ul>
+<% } %>
+<%  })  %>
+
 </body>
 </html>
