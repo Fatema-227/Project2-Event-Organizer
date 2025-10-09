@@ -4,41 +4,38 @@
 
 ## By: Fatema Hussain, Fatema Mohammed, Fatema Ali
 
-### Description:
+### ***Description:***
 Event Organize is an application that allows users to send and receive invitations.
 
-
-### Technologies used:
+***
+### ***Technologies used:***
 - CSS
 - HTML
 - Nodejs
 - MongoDB
 - Mongoose
 - Express.js
-
-### Getting Started
-
-### Trello
-
-follow the project phases in [trello](https://trello.com/b/Icpr5auL)
-
-### ERD:
+***
+### ***Trello:***
+Follow the project phases in [trello](https://trello.com/b/Icpr5auL)
+***
+### ***ERD:***
 ![](./assets/ERD.png)
-
-## WireFrames
-### Home page
-![](./assets/Welcome%20Page.png)
-### Dashboard Guest
-![](./assets/Dashboard%20Guest.png)
-### Dashboard Organizer
-![](./assets/Dashboard%20Organizer.png)
+***
+### ***WireFrames:***
+#### Welcome page
+![](./assets/Welcome-Page.png)
+#### Home Page
+![](./assets/home-page.png)
 
 
 
-### Future Updates
-- [ ] Real-time push notifications for all invitations and  events.
+***
+### ***Future Updates:***
+- [ ] Determine roles for each guest.
 - [ ] Live streaming of events within the app,including an interactive chat
-
-### Credits
--
--
+***
+### ***Credits:***
+#### [Multiple populate](https://stackoverflow.com/questions/12821596/multiple-populates-mongoosejs)
+#### [Find & Sort](https://stackoverflow.com/questions/4299991/how-to-sort-in-mongoose)
+#### [Select multiple option](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions)
