@@ -8,11 +8,11 @@
 Evenvite is an event creation platform.  You can choose who you want to invite if it's private.  They will be able to reserve the event if it is open to the public.  An invitation card that enables the guest to respond to the event organizer is given to them in exchange.
 ***
 ### ***Technologies used:***
-* Languages:
+* Frontend:
   * HTML
   * CSS
   * JavaScript
-* Framework and Libraries:
+* Backend:
   * Node.js
   * Express.js
   * Mongoose
