@@ -5,16 +5,19 @@
 ## By: Fatema Hussain, Fatema Mohammed, Fatema Ali
 
 ### ***Description:***
-Event Organize is an application that allows users to send and receive invitations.
-
+Evenvite is an event creation platform.  You can choose who you want to invite if it's private.  They will be able to reserve the event if it is open to the public.  An invitation card that enables the guest to respond to the event organizer is given to them in exchange.
 ***
 ### ***Technologies used:***
-- CSS
-- HTML
-- Nodejs
-- MongoDB
-- Mongoose
-- Express.js
+* Languages:
+  * HTML
+  * CSS
+  * JavaScript
+* Framework and Libraries:
+  * Node.js
+  * Express.js
+  * Mongoose
+* Database(NoSQL):
+  * MongoDB
 ***
 ### ***Trello:***
 Follow the project phases in [trello](https://trello.com/b/Icpr5auL)
