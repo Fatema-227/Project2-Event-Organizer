@@ -1,16 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Evenvite App</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body>
-  <div class="banner">
-    <%- include("./partials/_navbar") %>
-    <h1 class="first-page">Event and Invitations App</h1>
+  <%- include("./partials/_navbar") %>
+  <% if (!user) { %>
+  <main class="home-landing-container">
+    <section class="home-landing-content">
+    <div class="home-landing-image">
+      <img src="/images/Logo.png" alt="Welcome Illustration" />
+    </div>
+      <h1 class="home-landing-title">Welcome to Evenvite</h1>
+      <p class="home-landing-description">
+        Your journey begins here! A platform designed to facilitate event organization and guest invitations.
+      </p>
+    </section>
+  </main>
+  <% } else { %>
+    <div class="home-container">
+    <header class="home-header">
+      <h1 class="home-title">Welcome back, <%= user.username %> 👋</h1>
+      <p class="home-subtitle">
+        We're happy to have you back! This platform helps you manage events and view your invitations.
+      </p>
+    </header>
+
+    <div class="home-cards no-links">
+      <div class="home-card">
+        <h3>🎉 Events</h3>
+        <p>You can create, view, and manage your personal and shared events.</p>
+      </div>
+
+      <div class="home-card">
+        <h3>📨 Invitations</h3>
+        <p>Receive and manage event invitations. Accept or decline with just a click.</p>
+      </div>
+
+      <div class="home-card">
+        <h3>👤 Your Profile</h3>
+        <p>Update your personal information, password, and profile picture anytime.</p>
+      </div>
+    </div>
   </div>
+  <% } %>
 </body>
-
-
-
+</html>

@@ -16,8 +16,6 @@ exports.auth_signup_post = async (req, res) => {
   if (req.body.password !== req.body.confirmPassword) {
     return res.send("Password and confirm password must match")
   }
-  //Save user image
-req.body.picture=req.file.filename
 
 // password encryption
   const hashedPassword = bcrypt.hashSync(req.body.password, 10)
@@ -37,7 +35,7 @@ exports.auth_signin_post = async (req, res) => {
   // Find the user in the database
   const userInDatabase = await User.findOne({ username: req.body.username })
   if (!userInDatabase) {
-    return res.send("Login failed. Please try again later..")
+    return res.send("Login failed. Please try again later.")
   }
 
   //Verify the password
@@ -46,7 +44,7 @@ exports.auth_signin_post = async (req, res) => {
     userInDatabase.password
   )
   if (!validPassword) {
-    return res.send("Login failed. Please try again later..")
+    return res.send("Login failed. Please try again later.")
   }
 
   req.session.user = {

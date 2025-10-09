@@ -1,20 +1,40 @@
-<%- include("../partials/_navbar.ejs") %>
-<h1>Create a new account</h1>
-<form action="/auth/sign-up" method="post" enctype="multipart/form-data">
-  <label for="username">Username</label>
-  <input type="text" name="username" id="userName" />
-  <br />
-  <label for="email">Email</label>
-  <input type="email" name="email" id="email" />
-  <br />
-  <label for="Password">Password</label>
-  <input type="password" name="password" id="password" />
-  <br />
-  <label for="ConfirmPassword">Confirm Password</label>
-  <input type="password" name="confirmPassword" id="confirmPassword" />
-  <br />
-  <label for="pictrue">Picture</label>
-  <input type="file" name="picture" id="picture"/>
-  <br />
-  <button type="submit">Sign up</button>
-</form>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign up</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+
+<body>
+  <%- include("../partials/_navbar.ejs") %>
+
+  <form class="signup-form-container" action="/auth/sign-up" method="post" enctype="multipart/form-data">
+    <h1 class="signup-page-title"> Sign Up </h1>
+    <label class="signup-form-label" for="username">Username</label>
+    <input class="signup-form-input" type="text" name="username" id="userName" />
+
+    <br />
+
+    <label class="signup-form-label" for="email">Email</label>
+    <input class="signup-form-input" type="email" name="email" id="email" />
+
+    <br />
+
+    <label class="signup-form-label" for="Password">Password</label>
+    <input class="signup-form-input" type="password" name="password" id="password" />
+
+    <br />
+
+    <label class="signup-form-label" for="ConfirmPassword">Confirm Password</label>
+    <input class="signup-form-input" type="password" name="confirmPassword" id="confirmPassword" />
+
+    <br />
+
+    <!-- <label for="pictrue">Picture</label> -->
+    <input type="hidden" name="picture" id="picture" />
+
+    <br />
+
+    <button class="signup-form-button" type="submit">Sign up</button>
+  </form>
+</body>
