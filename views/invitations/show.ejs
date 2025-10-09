@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>Show Invitation</title>
   </head>
   <body>
@@ -10,7 +11,7 @@
       <%-include("../partials/_navbar.ejs")%>
     <% } %>
 
-    <form action="/invitations" method="post" class="show-invitation-form">
+    <div class="show-invitation-form">
       <h2 class="show-invitation-title"><%= invitations.event_id.title %></h2>
       <p class="show-invitation-description"><%= invitations.event_id.description %></p>
       <p class="show-invitation-date"><%= invitations.event_id.date %></p>
@@ -42,7 +43,7 @@
           <a href="/invitations/edit/<%= invitations._id %>" class="edit-link">Edit Invitation</a>
         </button>
       <% } %>
-    </form>
+      </div>
 
     <% if(invitations.sendInvitation === "Draft"){ %>
       <form action="/invitations/<%= invitations._id %>" method="post" class="send-invitation-form">
