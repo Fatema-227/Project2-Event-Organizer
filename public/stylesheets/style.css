@@ -26,7 +26,7 @@ nav {
   box-shadow: 0 4px 12px rgba(106, 27, 45, 0.1);
   width: 100vw;
   margin: 0;
-  position:relative;
+  position: relative;
   top: -40px;
   z-index: 999;
   margin-bottom: 20px;
@@ -577,14 +577,14 @@ button.submit-button:hover {
 }
 
 .invitation-card-front {
-  background-image: url('/images/bg-card.png');
+  background-image: url("/images/bg-card.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .invitation-card-back {
-  background-image: url('/images/bg-front.png');
+  background-image: url("/images/bg-front.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -600,7 +600,7 @@ button.submit-button:hover {
   text-align: center;
 }
 
-.card-back-info{
+.card-back-info {
   padding-top: 30px;
   max-width: 90%;
 }
@@ -620,7 +620,7 @@ button.submit-button:hover {
   color: #6a1b2d;
 }
 
-.invitation-description{
+.invitation-description {
   margin-bottom: 20px;
   line-height: 1.6;
   font-size: 1rem;
@@ -680,7 +680,7 @@ button.submit-button:hover {
 }
 
 /* send ejs --> invitation */
-.successful-message{
+.successful-message {
   font-size: 2.5rem;
   text-align: center;
   padding: 20px;
@@ -689,7 +689,7 @@ button.submit-button:hover {
   line-height: 1.2;
 }
 
-.important-msg{
+.important-msg {
   color: #4a1023;
 }
 
@@ -762,8 +762,8 @@ h2 {
   border-left: 5px solid #6a1b2d;
 }
 .event-card.completed {
-  background-color: #f7efe8; /* بيج باهت */
-  color: #6b4e4e; /* ماروني باهت */
+  background-color: #f7efe8;
+  color: #6b4e4e;
   opacity: 0.7;
   cursor: not-allowed;
   pointer-events: none;
@@ -806,15 +806,15 @@ h2 {
 }
 
 .floating-add-btn:hover {
-  background-color: #a52a2a; /* ماروني أفتح */
+  background-color: #a52a2a;
   transform: scale(1.1);
   box-shadow: 0 6px 16px rgba(128, 0, 0, 0.4);
 }
-/* ===== صفحة إنشاء حدث جديد ===== */
+
 .create-event-container {
   width: 80%;
   max-width: 700px;
-  background-color: #fffaf7; /* بيج فاتح مشابه للصفحة الرئيسية */
+  background-color: #fffaf7;
   border-radius: 16px;
   padding: 30px 40px;
   box-shadow: 0 4px 15px rgba(90, 50, 50, 0.2);
@@ -883,7 +883,7 @@ h2 {
 
 .event-form button {
   padding: 10px 20px;
-  background-color: #800000; /* عنابي */
+  background-color: #800000;
   color: #fdfaf7;
   font-weight: 600;
   border-radius: 10px;
@@ -902,8 +902,8 @@ h2 {
 }
 
 .event-btn {
-  background-color: #800000; /* عنابي */
-  color: #fdfaf7; /* بيج فاتح */
+  background-color: #800000;
+  color: #fdfaf7;
   border: none;
   padding: 10px 25px;
   border-radius: 12px;
@@ -915,7 +915,7 @@ h2 {
 }
 
 .event-btn:hover {
-  background-color: #a52a2a; /* ماروني أفتح */
+  background-color: #a52a2a;
   transform: scale(1.05);
 }
 .details-container {
@@ -924,7 +924,7 @@ h2 {
   padding: 25px;
   background: #fff;
   border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .details-container h1 {
@@ -989,12 +989,12 @@ h2 {
 .buttons {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* عشان لو الشاشه صغيره ينزلون تحت */
+  flex-wrap: wrap;
   gap: 15px;
   margin-top: 25px;
 }
-.content{
-  text-align: center
+.content {
+  text-align: center;
 }
 
 .buttons button,
@@ -1019,4 +1019,7 @@ h2 {
     opacity: 1;
     transform: translateY(0);
   }
+}
+.invitation-link {
+  text-align: none;
 }
