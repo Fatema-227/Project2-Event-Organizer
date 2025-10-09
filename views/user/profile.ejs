@@ -1,12 +1,29 @@
-<h1>User Profile</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
 
-<h3>User Information:</h3>
+<body class="profile-page-body">
+  <%- include("../partials/_navbar.ejs") %>
 
-<% if(user.picture) { %>
-<img src="../uploads/<%= user.picture %>" alt="profile-picture" width="150px" />
-<% } %>
-<p><b>username:</b> <%= user.username %></p>
-<p><b>Email:</b> <%= user.email %></p>
+  <div class="profile-main-content">
+    <h1 class="profile-page-title">User Profile</h1>
 
-<a href="/user/<%= user._id %>/edit">Edit</a>
-<link rel="stylesheet" href="/style.css" />
+    <div class="profile-info-container">
+      <h3 class="profile-section-title">User Information</h3>
+
+      <% if(user.picture) { %>
+        <img class="profile-user-image" src="../uploads/<%= user.picture %>" alt="profile-picture" width="150px" />
+      <% } %>
+
+      <p class="profile-info-item"><b>username:</b> <%= user.username %></p>
+      <p class="profile-info-item"><b>Email:</b> <%= user.email %></p>
+
+      <a class="profile-edit-link" href="/user/<%= user._id %>/edit">Edit</a>
+    </div>
+  </div>
+</body>
+
+

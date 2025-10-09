@@ -41,7 +41,7 @@
     <ul class="invitation-list">
       <li class="invitation-item">
         <a href="/invitations/showguest/<%= invitation._id %>" class="invitation-link invitation-guest">
-          ✦ new | <%= invitation.event_id.title %> Invitation
+          ✦ new | <%= invitation.event_id ?  invitation.event_id.title : "Unknown Event" %> Invitation
         </a>
       </li>
     </ul>

@@ -1,35 +1,45 @@
-<%- include("../partials/_navbar") %>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
 
-<h1>Update User Information</h1>
-<form action="/user/<%= user._id %>/edit?_method=PUT" method="post">
-  <label for="username"> username </label>
-  <input type="text" name="username" id="firstname" value="<%= user.username %>">
-  <br /><br />
+<body class="profile-edit-body">
+  <%- include("../partials/_navbar") %>
 
-  <label for="email"> Email </label>
-  <input type="email" name="email" id="email" value="<%= user.email %>"required>
-  <br /><br />
+  <h1 class="profile-edit-title">Update User Information</h1>
 
-  <label> Old Password </label>
-  <input type="oldPassword" name="oldPassword" id="oldPassword" required />
-  <br /><br />
+  <form action="/user/<%= user._id %>/edit?_method=PUT" method="post" class="profile-edit-form">
+    <label for="username" class="profile-edit-label">username</label>
+    <input type="text" name="username" id="firstname" value="<%= user.username %>" class="profile-edit-input" />
+    <br /><br />
 
-  <label> Password </label>
-  <input type="password" name="newPassword" id="newPassword" required />
-  <br /><br />
+    <label for="email" class="profile-edit-label">Email</label>
+    <input type="email" name="email" id="email" value="<%= user.email %>" required class="profile-edit-input" />
+    <br /><br />
 
-  <label> Confirm Password </label>
-  <input type="password" name="confirmPassword" id="confirmPassword" required />
-  <br /><br />
+    <label for="oldPassword" class="profile-edit-label">Old Password</label>
+    <input type="oldPassword" name="oldPassword" id="oldPassword" required class="profile-edit-input" />
+    <br /><br />
 
+    <label for="newPassword" class="profile-edit-label">Password</label>
+    <input type="password" name="newPassword" id="newPassword" required class="profile-edit-input" />
+    <br /><br />
 
-  <button type="submit">Update Information</button><br /><br />
-</form>
+    <label for="confirmPassword" class="profile-edit-label">Confirm Password</label>
+    <input type="password" name="confirmPassword" id="confirmPassword" required class="profile-edit-input" />
+    <br /><br />
 
-<form action="/user/<%= user._id %>/update-picture?_method=PUT" method="post" enctype="multipart/form-data">
-  <label for="picture"> Profile Picture </label>
-  <input type="file" name="picture" accept="image/*" value="" >
-  <br /><br />
-  <button type="submit">Update Picture</button>
-  <br /><br />
-</form>
+    <button type="submit" class="profile-edit-btn">Update Information</button>
+    <br /><br />
+  </form>
+
+  <form action="/user/<%= user._id %>/update-picture?_method=PUT" method="post" enctype="multipart/form-data" class="profile-picture-form">
+    <label for="picture" class="profile-picture-label">Profile Picture</label>
+    <input type="file" name="picture" accept="image/*" class="profile-picture-input" />
+    <br /><br />
+    <button type="submit" class="profile-picture-btn">Update Picture</button>
+    <br /><br />
+  </form>
+</body>
