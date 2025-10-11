@@ -44,13 +44,18 @@
         </button>
       <% } %>
       </div>
+      <div class="send-delete-button">
+      <% if(invitations.sendInvitation === "Draft"){ %>
+        <form action="/invitations/<%= invitations._id %>" method="post" class="send-invitation-form">
+          <br />
+          <button type="submit" class="send-invitation-button">Send Invitation</button>
+        </form>
+      <% } %>
 
-    <% if(invitations.sendInvitation === "Draft"){ %>
-      <form action="/invitations/<%= invitations._id %>" method="post" class="send-invitation-form">
-        <br />
-        <button type="submit" class="send-invitation-button">Send Invitation</button>
+
+      <form action="/invitations/<%= invitations._id %>?_method=DELETE" method="post" class="delete-invitation-form">
+        <br /><button type="submit" class="delete-invitation-button">Delete Invitation</button>
       </form>
-    <% } %>
-
+    </div>
   </body>
 </html>

@@ -91,6 +91,18 @@ exports.invitation_edit_put = async (req, res) => {
   res.redirect(`/invitations/${invitationId}`)
 }
 
+exports.invitation_delete_delete= async(req,res)=>{
+  const invitations = await invitationOrganizer.findById(req.params.invitationId)
+  const event_id = invitations.event_id
+  const event = await Event.findById(event_id)
+  if(event){
+    event.eventStatus = "Draft"
+    await event.save()
+  }
+  await invitations.deleteOne()
+  res.redirect("/invitations")
+}
+
 exports.invitation_guest_delete= async(req,res)=>{
   const deleteGuests = req.params.guestId
   const invitationId = req.params.invitationId

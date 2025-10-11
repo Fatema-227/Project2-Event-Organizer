@@ -57,14 +57,13 @@
           }
         }
         if (allGuests.length > 0) {
-          const result = document.createElement("li");
-          result.classList.add("inv-my-guest");
-          result.innerText = allGuests;
-          document.querySelector(".inv-list-guests").appendChild(result);
-          if (result) {
-            allGuests.length = 0;
-            addButton.style.cursor = "not-allowed";
-          }
+          allGuests.forEach(guest => {
+          const result = document.createElement("li")
+          result.classList.add("inv-my-guest")
+          result.innerText = guest
+          document.querySelector(".inv-list-guests").appendChild(result)
+          })
+          addButton.style.cursor = "not-allowed";
         }
       };
       addButton.addEventListener("click", addNewGuest);

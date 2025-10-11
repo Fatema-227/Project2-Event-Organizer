@@ -1,52 +1,60 @@
 <head>
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
-<%- include("../partials/_navbar")%>
 
-<div class="details-container">
-  <h1><%=events.title%></h1>
-  <div class="content">
-  <%if(events.description!==""){%>
-    <p><span>Description:</span> <%=events.description%></p>
-  <%}%>
+<%- include("../partials/_navbar") %>
 
-  <p><span>Time:</span> <%= events.time %></p>
-  <p><span>Date:</span> <%= events.date %></p>
-  <p><span>Address:</span> <%=events.address%></p>
-  <p><span>Is public?</span> <%= events.isPublic ? 'Yes' : 'No' %></p>
+<div class="event-details-container">
+  <div class="event-details-box">
+    <header class="event-details-header">
+      <h1 class="event-details-title"><%= events.title %></h1>
+    </header>
 
-  <%if(events.isPublic===true){%>
-  <p><span>Guests limit:</span> <%=events.limit%></p>
-  <input type="text" name="seats" id="seats" value="<%=events.limit%>" hidden />
-  <%}%>
-<div class="buttons">
-  <% if(events.user_id._id.equals(currentUser)){ %>
-    <button><a href="/events/<%=events._id%>/edit">Edit</a></button>
-    <form action="/events/<%=events._id%>?_method=DELETE" method="post">
-      <button type="submit">Delete event</button>
-    </form>
+    <div class="event-details-content">
+      <% if (events.description !== "") { %>
+        <p><span class="event-details-label">Description:</span> <%= events.description %></p>
+      <% } %>
 
-    <% if(events.eventStatus=="Draft" && !events.isPublic){ %>
-    <form action="/events/<%=events._id%>/new" method="post">
-      <input type="hidden" name="submitType" id="submitType" />
-      <button type="submit" id="send" onclick="document.getElementById('submitType').value='invitation'">
-        Create invitation
-      </button>
-    </form>
-    <% } %>
-  <% } else { %>
-    <% if(userHasBooked) { %>
-    <form action="/events/<%= events._id %>/booked-by/<%= user._id %>?_method=DELETE" method="post">
-      <button type="submit">Cancel booking</button>
-    </form>
-    <% } else { %>
-    <form action="/events/<%= events._id %>/booked-by/<%= user._id %>" method="post">
-      <button type="submit">Book a seat</button>
-    </form>
-    <% } %>
-  <% } %>
+      <p><span class="event-details-label">Time:</span> <%= events.time %></p>
+      <p><span class="event-details-label">Date:</span> <%= events.date %></p>
+      <p><span class="event-details-label">Address:</span> <%= events.address %></p>
+      <p><span class="event-details-label">Is public?</span> <%= events.isPublic ? 'Yes' : 'No' %></p>
 
-  <button><a href="/events">Back</a></button>
-  </div>
+      <% if (events.isPublic === true) { %>
+        <p><span class="event-details-label">Guests limit:</span> <%= events.limit %></p>
+        <input type="text" name="seats" id="seats" value="<%= events.limit %>" hidden />
+      <% } %>
+    </div>
+
+    <div class="event-details-actions">
+      <% if (events.user_id._id.equals(currentUser)) { %>
+        <a class="event-btn event-edit-btn" href="/events/<%= events._id %>/edit">Edit</a>
+
+        <form action="/events/<%= events._id %>?_method=DELETE" method="post" class="event-form-inline">
+          <button type="submit" class="event-btn event-delete-btn">Delete event</button>
+        </form>
+
+        <% if (events.eventStatus === "Draft" && !events.isPublic) { %>
+          <form action="/events/<%= events._id %>/new" method="post" class="event-form-inline">
+            <input type="hidden" name="submitType" id="submitType" />
+            <button type="submit" class="event-btn event-invite-btn"
+              onclick="document.getElementById('submitType').value='invitation'">Create invitation</button>
+          </form>
+        <% } %>
+
+      <% } else { %>
+        <% if (userHasBooked) { %>
+          <form action="/events/<%= events._id %>/booked-by/<%= user._id %>?_method=DELETE" method="post" class="event-form-inline">
+            <button type="submit" class="event-btn event-cancel-btn">Cancel booking</button>
+          </form>
+        <% } else { %>
+          <form action="/events/<%= events._id %>/booked-by/<%= user._id %>" method="post" class="event-form-inline">
+            <button type="submit" class="event-btn event-book-btn">Book a seat</button>
+          </form>
+        <% } %>
+      <% } %>
+
+      <a class="event-btn event-back-btn" href="/events">Back</a>
+    </div>
   </div>
 </div>
