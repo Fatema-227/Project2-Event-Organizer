@@ -23,7 +23,7 @@ Evenvite is an event creation platform.  You can choose who you want to invite i
 Follow the project phases in [trello](https://trello.com/b/Icpr5auL)
 ***
 ### ***ERD:***
-![](./assets/ERD.png)
+![](./assets/ERD.jpg)
 ***
 ### ***WireFrames:***
 #### Welcome page
