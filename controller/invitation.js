@@ -60,7 +60,7 @@ exports.invitation_show_guest_post = async (req, res) => {
   await invitation.create(req.body)
 
   const invitations = await invitationOrganizer.find().populate("event_id").populate("guests")
-  res.render("invitations/index.ejs", { invitations, userId})
+  res.render("/invitations", { invitations, userId})
 }
 
 exports.invitation_edit_get = async (req, res) => {

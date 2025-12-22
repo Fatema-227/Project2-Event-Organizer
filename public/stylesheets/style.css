@@ -106,7 +106,7 @@ nav p {
 .signup-form-container {
   background-color: #fff;
   max-width: 600px;
-  width:500px;
+  width: 500px;
   padding: 40px 30px;
   border-radius: 16px;
   box-shadow: 0 4px 15px rgba(90, 50, 50, 0.15);
@@ -165,7 +165,7 @@ nav p {
 .signin-form-container {
   background-color: #fff;
   max-width: 600px;
-  width:500px;
+  width: 500px;
   padding: 35px 30px;
   border-radius: 16px;
   box-shadow: 0 4px 15px rgba(90, 50, 50, 0.15);
@@ -284,16 +284,14 @@ body.profile-page-body {
   background-color: #f7f3f0;
   font-family: "Poppins", sans-serif;
   color: #3d2c2c;
-  /* لا تجعل body flex بعد الآن */
 }
 
 .profile-main-content {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* عمودياً */
-  align-items: center;     /* أفقياً */
-  min-height: calc(100vh - NAVBAR_HEIGHT); /* نطرح ارتفاع النافبار */
-  /* ممكن تضبط ارتفاع مناسب هنا */
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - NAVBAR_HEIGHT);
 }
 
 .profile-page-title {
@@ -372,7 +370,8 @@ body.profile-page-body {
   letter-spacing: 1px;
 }
 
-.profile-edit-form, .profile-picture-form {
+.profile-edit-form,
+.profile-picture-form {
   width: 80%;
   max-width: 500px;
   background-color: #fff;
@@ -537,6 +536,11 @@ body.profile-page-body {
   font-size: 1rem;
 }
 
+.description-invitation-event {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
 .label-invitation-event {
   font-weight: 600;
   color: #7a5c5c;
@@ -578,12 +582,8 @@ body.profile-page-body {
   transition: background-color 0.3s ease;
   width: fit-content;
 }
-.add-guest:hover:not([style*="not-allowed"]) {
+.add-guest:hover {
   background-color: #5b1a29;
-}
-.add-guest[style*="not-allowed"] {
-  cursor: not-allowed;
-  opacity: 0.6;
 }
 
 .submit-button {
@@ -704,12 +704,21 @@ button.submit-button:hover {
   font-size: 1rem;
 }
 
+.inv-description {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
 .inv-label {
   font-weight: 600;
   color: #7a5c5c;
   margin-top: 15px;
   display: block;
   font-size: 1rem;
+}
+
+.inv-label span {
+  font-size: 0.8rem;
 }
 
 .inv-select-guests {
@@ -746,12 +755,8 @@ button.submit-button:hover {
   width: fit-content;
   margin-bottom: 15px;
 }
-.inv-add-guest:hover:not([style*="not-allowed"]) {
+.inv-add-guest:hover {
   background-color: #5b1a29;
-}
-.inv-add-guest[style*="not-allowed"] {
-  cursor: not-allowed;
-  opacity: 0.6;
 }
 
 .inv-submit-button {
@@ -814,6 +819,11 @@ button.submit-button:hover {
   font-size: 1rem;
   margin-bottom: 10px;
   color: #5b4335;
+}
+
+.show-invitation-description {
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .show-guests-subtitle {
@@ -888,7 +898,7 @@ button.submit-button:hover {
   font-size: 1rem;
 }
 
-.send-delete-button{
+.send-delete-button {
   display: flex;
   flex-direction: row;
   gap: 40px;
@@ -1052,18 +1062,34 @@ button.submit-button:hover {
 }
 
 /* send ejs --> invitation */
+.send-successfully-message {
+  width: 80%;
+  max-width: 900px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(90, 50, 50, 0.2) 0px 4px 15px;
+  border-radius: 16px;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: 0.6s ease-in-out 0s 1 normal none running fadeIn;
+}
+
+.send-img-successfully{
+  width: 15%;
+  margin-bottom: 15px;
+}
+
 .successful-message {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   text-align: center;
   padding: 20px;
   border-radius: 15px;
   max-width: 90vw;
   line-height: 1.2;
-}
-
-.important-msg {
   color: #4a1023;
 }
+
 
 .container {
   width: 80%;
@@ -1074,20 +1100,24 @@ button.submit-button:hover {
   padding: 30px 40px;
   animation: fadeIn 0.6s ease-in-out;
 }
+
 header {
   text-align: center;
   margin-bottom: 30px;
 }
+
 header h1 {
   color: #5b2c2c;
   font-size: 2rem;
   margin-bottom: 10px;
   letter-spacing: 1px;
 }
+
 .subtitle {
   font-size: 1rem;
   color: #7a5c5c;
 }
+
 h2 {
   color: #4a1023;
   border-left: 6px solid #c7a17a;
@@ -1324,6 +1354,8 @@ h2 {
   margin: 10px 0;
   color: #5a4a43;
   font-size: 1rem;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .event-details-label {
@@ -1335,7 +1367,7 @@ h2 {
   margin-top: 30px;
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
   justify-content: center;
 }
 
@@ -1391,7 +1423,6 @@ h2 {
   color: white;
   transform: translateY(-2px);
 }
-
 
 @keyframes fadeIn {
   from {

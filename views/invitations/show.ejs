@@ -13,10 +13,10 @@
 
     <div class="show-invitation-form">
       <h2 class="show-invitation-title"><%= invitations.event_id.title %></h2>
-      <p class="show-invitation-description"><%= invitations.event_id.description %></p>
-      <p class="show-invitation-date"><%= invitations.event_id.date %></p>
-      <p class="show-invitation-time"><%= invitations.event_id.time %></p>
-      <p class="show-invitation-address"><%= invitations.event_id.address %></p>
+      <p class="show-invitation-description"><strong>Description: </strong><%= invitations.event_id.description %></p>
+      <p class="show-invitation-date"><strong>Date: </strong><%= invitations.event_id.date %></p>
+      <p class="show-invitation-time"><strong>Time: </strong><%= invitations.event_id.time %></p>
+      <p class="show-invitation-address"><strong>Address: </strong><%= invitations.event_id.address %></p>
 
       <% if(invitations.event_id.user_id.equals(currentUser)){ %>
         <h4 class="show-guests-subtitle">All Guests</h4>
