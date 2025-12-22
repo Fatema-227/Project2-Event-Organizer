@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <title>Send Invitation</title>
-</head>
-<body>
-  <%-include("../partials/_navbar.ejs")%>
-  <h1 class="successful-message">Send invitation to all users <b class="important-msg">successfully.</b></h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Send Invitation</title>
+  </head>
+  <body>
+    <%-include("../partials/_navbar.ejs")%>
+    <div class="send-successfully-message">
+      <img src="https://cdn-icons-png.flaticon.com/512/11433/11433360.png" class="send-img-successfully">
+      <h1 class="successful-message">
+        The invitation has been successfully sent to all guests.
+      </h1>
+    </div>
+  </body>
 </html>

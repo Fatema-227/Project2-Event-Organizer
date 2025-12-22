@@ -106,7 +106,7 @@ nav p {
 .signup-form-container {
   background-color: #fff;
   max-width: 600px;
-  width:500px;
+  width: 500px;
   padding: 40px 30px;
   border-radius: 16px;
   box-shadow: 0 4px 15px rgba(90, 50, 50, 0.15);
@@ -165,7 +165,7 @@ nav p {
 .signin-form-container {
   background-color: #fff;
   max-width: 600px;
-  width:500px;
+  width: 500px;
   padding: 35px 30px;
   border-radius: 16px;
   box-shadow: 0 4px 15px rgba(90, 50, 50, 0.15);
@@ -284,16 +284,14 @@ body.profile-page-body {
   background-color: #f7f3f0;
   font-family: "Poppins", sans-serif;
   color: #3d2c2c;
-  /* لا تجعل body flex بعد الآن */
 }
 
 .profile-main-content {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* عمودياً */
-  align-items: center;     /* أفقياً */
-  min-height: calc(100vh - NAVBAR_HEIGHT); /* نطرح ارتفاع النافبار */
-  /* ممكن تضبط ارتفاع مناسب هنا */
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - NAVBAR_HEIGHT);
 }
 
 .profile-page-title {
@@ -372,7 +370,8 @@ body.profile-page-body {
   letter-spacing: 1px;
 }
 
-.profile-edit-form, .profile-picture-form {
+.profile-edit-form,
+.profile-picture-form {
   width: 80%;
   max-width: 500px;
   background-color: #fff;
@@ -537,6 +536,11 @@ body.profile-page-body {
   font-size: 1rem;
 }
 
+.description-invitation-event {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
 .label-invitation-event {
   font-weight: 600;
   color: #7a5c5c;
@@ -578,12 +582,8 @@ body.profile-page-body {
   transition: background-color 0.3s ease;
   width: fit-content;
 }
-.add-guest:hover:not([style*="not-allowed"]) {
+.add-guest:hover {
   background-color: #5b1a29;
-}
-.add-guest[style*="not-allowed"] {
-  cursor: not-allowed;
-  opacity: 0.6;
 }
 
 .submit-button {
@@ -704,12 +704,21 @@ button.submit-button:hover {
   font-size: 1rem;
 }
 
+.inv-description {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
 .inv-label {
   font-weight: 600;
   color: #7a5c5c;
   margin-top: 15px;
   display: block;
   font-size: 1rem;
+}
+
+.inv-label span {
+  font-size: 0.8rem;
 }
 
 .inv-select-guests {
@@ -746,12 +755,8 @@ button.submit-button:hover {
   width: fit-content;
   margin-bottom: 15px;
 }
-.inv-add-guest:hover:not([style*="not-allowed"]) {
+.inv-add-guest:hover {
   background-color: #5b1a29;
-}
-.inv-add-guest[style*="not-allowed"] {
-  cursor: not-allowed;
-  opacity: 0.6;
 }
 
 .inv-submit-button {
@@ -814,6 +819,11 @@ button.submit-button:hover {
   font-size: 1rem;
   margin-bottom: 10px;
   color: #5b4335;
+}
+
+.show-invitation-description {
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .show-guests-subtitle {
@@ -886,6 +896,12 @@ button.submit-button:hover {
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
+}
+
+.send-delete-button {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
 }
 
 .send-invitation-form,
@@ -1046,18 +1062,34 @@ button.submit-button:hover {
 }
 
 /* send ejs --> invitation */
+.send-successfully-message {
+  width: 80%;
+  max-width: 900px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(90, 50, 50, 0.2) 0px 4px 15px;
+  border-radius: 16px;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: 0.6s ease-in-out 0s 1 normal none running fadeIn;
+}
+
+.send-img-successfully{
+  width: 15%;
+  margin-bottom: 15px;
+}
+
 .successful-message {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   text-align: center;
   padding: 20px;
   border-radius: 15px;
   max-width: 90vw;
   line-height: 1.2;
-}
-
-.important-msg {
   color: #4a1023;
 }
+
 
 .container {
   width: 80%;
@@ -1068,20 +1100,24 @@ button.submit-button:hover {
   padding: 30px 40px;
   animation: fadeIn 0.6s ease-in-out;
 }
+
 header {
   text-align: center;
   margin-bottom: 30px;
 }
+
 header h1 {
   color: #5b2c2c;
   font-size: 2rem;
   margin-bottom: 10px;
   letter-spacing: 1px;
 }
+
 .subtitle {
   font-size: 1rem;
   color: #7a5c5c;
 }
+
 h2 {
   color: #4a1023;
   border-left: 6px solid #c7a17a;
@@ -1284,96 +1320,108 @@ h2 {
   background-color: #a52a2a;
   transform: scale(1.05);
 }
-.details-container {
-  width: 900px;
-  margin: 40px auto;
-  padding: 25px;
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 
-.details-container h1 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.details-container p {
-  font-size: 20px;
-  margin: 8px 0;
-  color: #555;
-}
-
-.details-container p span {
-  font-weight: bold;
-  color: #222;
-}
-
-.details-container form,
-.details-container button {
-  text-align: center;
-}
-
-.details-container button {
-  background-color: #4caf50;
-  border: none;
-  color: white;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-size: 15px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.details-container button:hover {
-  background-color: #45a049;
-}
-
-.details-container a {
-  color: white;
-  text-decoration: none;
-}
-
-.details-container form button[type="submit"]:nth-child(1) {
-  background-color: #f44336;
-}
-
-.details-container form button[type="submit"]:nth-child(1):hover {
-  background-color: #d32f2f;
-}
-
-/* Back button */
-.details-container button:last-child {
-  background-color: #555;
-}
-
-.details-container button:last-child:hover {
-  background-color: #333;
-}
-
-.buttons {
+/* show event */
+.event-details-container {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-top: 25px;
-}
-.content {
-  text-align: center;
+  padding: 40px;
 }
 
-.buttons button,
-.buttons form button {
-  width: 150px;
-  height: 52px;
-  background-color: #4caf50;
+.event-details-box {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(90, 50, 50, 0.2);
+  padding: 30px 40px;
+  width: 100%;
+  max-width: 900px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.event-details-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.event-details-title {
+  color: #5b2c2c;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.event-details-content p {
+  margin: 10px 0;
+  color: #5a4a43;
+  font-size: 1rem;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.event-details-label {
+  font-weight: 600;
+  color: #6a1b2d;
+}
+
+.event-details-actions {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.event-form-inline {
+  display: inline;
+}
+
+.event-btn {
+  padding: 10px 18px;
+  border-radius: 8px;
   border: none;
-  color: white;
-  border-radius: 10px;
-  font-size: 18px;
+  text-decoration: none;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  color: white;
+  background-color: #6a1b2d;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.event-btn:hover {
+  background-color: #51101f;
+  transform: translateY(-2px);
+}
+
+.event-edit-btn {
+  background-color: #8d4d4d;
+}
+
+.event-delete-btn {
+  background-color: #b23c3c;
+}
+
+.event-invite-btn {
+  background-color: #a0765c;
+}
+
+.event-cancel-btn {
+  background-color: #aa7d7d;
+}
+
+.event-book-btn {
+  background-color: #5a3d3d;
+}
+
+.event-back-btn {
+  background-color: #c7a17a;
+  color: #3d2c2c;
+}
+
+.event-back-btn:hover {
+  background-color: #51101f;
+  color: white;
+  transform: translateY(-2px);
 }
 
 @keyframes fadeIn {

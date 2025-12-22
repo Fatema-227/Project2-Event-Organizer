@@ -12,11 +12,11 @@
   <div class="container-invitation-event">
     <form action="/invitations/edit/<%= invitations._id %>?_method=PUT" method="post" class="form-invitation-event">
       <h2 class="title-invitation-event"><%= invitations.event_id.title %></h2>
-      <p class="description-invitation-event"><%= invitations.event_id.description %></p>
-      <p class="date-invitation-event"><%= invitations.event_id.date %></p>
-      <p class="time-invitation-event"><%= invitations.event_id.time %></p>
-      <p class="address-invitation-event"><%= invitations.event_id.address %></p>
-      <label class="label-invitation-event"><b>Add other guest</b>&nbsp;*Select all guests one time</label><br />
+      <p class="description-invitation-event"><strong>Description: </strong><%= invitations.event_id.description %></p>
+      <p class="date-invitation-event"><strong>Date: </strong><%= invitations.event_id.date %></p>
+      <p class="time-invitation-event"><strong>Time: </strong><%= invitations.event_id.time %></p>
+      <p class="address-invitation-event"><strong>Address: </strong><%= invitations.event_id.address %></p>
+      <label class="label-invitation-event"><strong>Select the guest</strong>&nbsp;<span>*Select all guests one time</span></label><br />
       <select name="guests" id="guests" multiple class="select-guests">
         <% allUsers.forEach(user => { %>
           <% const specificUser = invitations.guests.some(guest => guest._id.equals(user._id)) %>
@@ -65,14 +65,14 @@
           document.querySelector('.list-guests').appendChild(result)
 
           if(result){
-            addButton.style.cursor = "not-allowed"
+            addButton.style.display = "none"
           }
         }
       }
       console.log(allGuests)
     }
     addButton.addEventListener('click', () => {
-      if(addButton.style.cursor !== "not-allowed"){
+      if(addButton.style.display = "none"){
         addNewGuest()
       }
     })

@@ -60,7 +60,7 @@ exports.invitation_show_guest_post = async (req, res) => {
   await invitation.create(req.body)
 
   const invitations = await invitationOrganizer.find().populate("event_id").populate("guests")
-  res.render("invitations/index.ejs", { invitations, userId})
+  res.render("/invitations", { invitations, userId})
 }
 
 exports.invitation_edit_get = async (req, res) => {
@@ -89,6 +89,18 @@ exports.invitation_edit_put = async (req, res) => {
     )
 
   res.redirect(`/invitations/${invitationId}`)
+}
+
+exports.invitation_delete_delete= async(req,res)=>{
+  const invitations = await invitationOrganizer.findById(req.params.invitationId)
+  const event_id = invitations.event_id
+  const event = await Event.findById(event_id)
+  if(event){
+    event.eventStatus = "Draft"
+    await event.save()
+  }
+  await invitations.deleteOne()
+  res.redirect("/invitations")
 }
 
 exports.invitation_guest_delete= async(req,res)=>{
